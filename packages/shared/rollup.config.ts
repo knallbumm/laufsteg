@@ -3,6 +3,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { defineConfig } from 'rollup';
 import dts from 'rollup-plugin-dts';
 import esbuild from 'rollup-plugin-esbuild';
+ import postcss from 'rollup-plugin-postcss';
 
 const iifeName = 'Laufsteg';
 
@@ -20,7 +21,12 @@ export default [
       },
     ],
     external: [], // TODO maybe use something like @manypkg/get-packages
-    plugins: [esbuild()],
+    plugins: [
+      postcss({
+        extensions: ['.css'],
+      }),
+      esbuild(),
+    ],
   }),
   defineConfig({
     input: 'index.ts',
@@ -34,6 +40,9 @@ export default [
       },
     ],
     plugins: [
+      postcss({
+        extensions: ['.css'],
+      }),
       esbuild({
         minify: true,
       }),
@@ -47,6 +56,11 @@ export default [
       file: 'dist/index.d.ts',
       format: 'es',
     },
-    plugins: [dts({})],
+    plugins: [
+      postcss({
+        extensions: ['.css'],
+      }),
+      dts({}),
+    ],
   }),
 ];
