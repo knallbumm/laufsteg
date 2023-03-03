@@ -16,12 +16,13 @@
 - ⚡️ Optimized for Performance (efficient reordering & CPU/GPU Usage)
 - 🧈 Buttery smooooooooth
 - 📱 Support for Touch-Devices
-- 🙏🏽 Framework agnostic (Works with React, Vue, Svelte & even with Vanilla JS/TS)
+- 🙏🏽 Framework agnostic (Works with [React](https://github.com/knallbumm/laufsteg/tree/main/packages/laufsteg-react), Vue, Svelte & even with Vanilla JS/TS)
 - 🎁 Many more little things that make developers happy
 
 ## Open TODOs / Currently not supported
 
 - 📏 Variable cell sizes
+- 🔥 Updating options after initializing
 
 ## Demo Usecases
 
