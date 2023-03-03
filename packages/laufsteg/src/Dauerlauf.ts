@@ -24,10 +24,10 @@ export class Dauerlauf {
 
   private OPTIONS: DauerlaufOptions;
 
-  private state?: 'CSS_ANIMATING' | 'DECLERATING' | 'DRAGGING' = undefined;
+  private STATE?: 'CSS_ANIMATING' | 'DECLERATING' | 'DRAGGING' = undefined;
 
-  private containerSize: Size;
-  private cellSize: Size;
+  private CONTAINER_SIZE: Size;
+  private CELL_SIZE: Size;
 
   private CELL_POSITITIONS: number[] = [];
 
@@ -36,18 +36,16 @@ export class Dauerlauf {
   private CURRENT_DRAG_START_X?: number = undefined;
   private CURRENT_DRAG_OFFSET?: number = undefined;
 
-  private ANIMATING_SPEED = 100;
-
   private DRAG_RELEASE_SPEED = 0;
 
   private NEXT_ANIMATION_STEP = 0;
 
   private LAST_KNOWN_SPEEDS: number[] = [];
 
-  LAST_MOVE_TIMESTAMP = 0;
+  private LAST_MOVE_TIMESTAMP = 0;
 
-  FRAME_COUNT = 0;
-  PREVIOUSE_TIMESTAMP: number | undefined = undefined;
+  private DECELERATION_START: number | undefined = undefined;
+  private PREVIOUSE_TIMESTAMP: number | undefined = undefined;
 
   constructor(container: HTMLDivElement, options: Partial<DauerlaufOptions>) {
     this.OPTIONS = {
@@ -71,10 +69,10 @@ export class Dauerlauf {
 
     // Sizes the trolley based on the first cell
     const firstCell = this.DOM_NODES.cells[0];
-    this.cellSize = getCellPixelSize(firstCell);
-    setTrolleySize(this.DOM_NODES.trolley, this.cellSize);
+    this.CELL_SIZE = getCellPixelSize(firstCell);
+    setTrolleySize(this.DOM_NODES.trolley, this.CELL_SIZE);
 
-    this.containerSize = getContainerSize(container);
+    this.CONTAINER_SIZE = getContainerSize(container);
 
     this.cloneCellsWhenNeeded();
 
@@ -94,7 +92,7 @@ export class Dauerlauf {
   }
 
   get animating() {
-    return this.state == 'CSS_ANIMATING';
+    return this.STATE == 'CSS_ANIMATING';
   }
 
   private addEventListeners() {
@@ -128,7 +126,7 @@ export class Dauerlauf {
     }
 
     this.stopCSSAnimation();
-    this.state = 'DRAGGING';
+    this.STATE = 'DRAGGING';
     this.resetDecelerating();
 
     this.CURRENT_DRAG_START_X = getEventXPosition(event);
@@ -137,7 +135,7 @@ export class Dauerlauf {
 
   private draggingMoved = (event: MouseEvent | TouchEvent) => {
     const isCurrentlyDragging =
-      this.CURRENT_DRAG_START_X != undefined && this.state == 'DRAGGING';
+      this.CURRENT_DRAG_START_X != undefined && this.STATE == 'DRAGGING';
 
     if (!isCurrentlyDragging) {
       return;
@@ -171,7 +169,7 @@ export class Dauerlauf {
 
     this.resetDrag();
 
-    this.state = 'DECLERATING';
+    this.STATE = 'DECLERATING';
 
     this.beginDeceleration(performance.now());
   };
@@ -190,8 +188,8 @@ export class Dauerlauf {
     const { leftOverdose, rightOverdose } = calculateOverdoses({
       offset: this.offset,
       min,
-      cellSize: this.cellSize,
-      containerSize: this.containerSize,
+      cellSize: this.CELL_SIZE,
+      containerSize: this.CONTAINER_SIZE,
       numberOfCells: this.CELL_POSITITIONS.length,
     });
 
@@ -199,8 +197,8 @@ export class Dauerlauf {
       const difference = rightOverdose - leftOverdose;
       const correctedDifference = Math.abs(
         rightOverdose -
-          this.cellSize.width -
-          (leftOverdose + this.cellSize.width)
+          this.CELL_SIZE.width -
+          (leftOverdose + this.CELL_SIZE.width)
       );
 
       if (correctedDifference < difference) {
@@ -211,8 +209,8 @@ export class Dauerlauf {
       const difference = leftOverdose - rightOverdose;
       const correctedDifference = Math.abs(
         leftOverdose -
-          this.cellSize.width -
-          (rightOverdose + this.cellSize.width)
+          this.CELL_SIZE.width -
+          (rightOverdose + this.CELL_SIZE.width)
       );
 
       if (correctedDifference < difference) {
@@ -223,19 +221,23 @@ export class Dauerlauf {
   }
 
   private beginDeceleration(newTime: number) {
-    this.FRAME_COUNT += 1;
-
     let delta = 20; // TODO: Find better implementation for this random value
     if (this.PREVIOUSE_TIMESTAMP) {
       delta = newTime - this.PREVIOUSE_TIMESTAMP;
+    } else {
+      this.DECELERATION_START = performance.now();
     }
     this.PREVIOUSE_TIMESTAMP = newTime;
 
-    const finalSpeed = !this.CURRENT_DRAG_OFFSET ? this.ANIMATING_SPEED : 0;
+    const finalSpeed = !this.CURRENT_DRAG_OFFSET
+      ? this.OPTIONS.animationSpeed
+      : 0;
+
+    const progress = (newTime - (this.DECELERATION_START ?? newTime)) * 0.05;
 
     const currentSpeed =
       this.DRAG_RELEASE_SPEED *
-        Math.pow(0.99, this.FRAME_COUNT * this.OPTIONS.friction) +
+        Math.pow(0.99, progress * this.OPTIONS.friction) +
       finalSpeed;
 
     const pixelTravel = currentSpeed / (1000 / delta);
@@ -244,8 +246,8 @@ export class Dauerlauf {
 
     this.rearrangeCellsIfNeeded();
 
-    if (this.state == 'DECLERATING') {
-      if (Math.abs(currentSpeed) > 1 + Math.abs(this.ANIMATING_SPEED)) {
+    if (this.STATE == 'DECLERATING') {
+      if (Math.abs(currentSpeed) > 1 + Math.abs(this.OPTIONS.animationSpeed)) {
         window.requestAnimationFrame((time) => {
           this.beginDeceleration(time);
         });
@@ -260,9 +262,10 @@ export class Dauerlauf {
 
   private startCSSAnimation() {
     // TODO: Handle state when is decelerating
-    this.state = 'CSS_ANIMATING';
+    this.STATE = 'CSS_ANIMATING';
 
-    this.NEXT_ANIMATION_STEP = this.ABSOLUTE_DRAG_OFFSET - this.ANIMATING_SPEED;
+    this.NEXT_ANIMATION_STEP =
+      this.ABSOLUTE_DRAG_OFFSET - this.OPTIONS.animationSpeed;
     this.addCSSTransition();
     this.setOffsetToDOM(this.NEXT_ANIMATION_STEP);
 
@@ -270,7 +273,7 @@ export class Dauerlauf {
   }
 
   private stopCSSAnimation() {
-    if (this.state == 'CSS_ANIMATING') {
+    if (this.STATE == 'CSS_ANIMATING') {
       this.captureCurrentOffset();
       this.setOffsetToDOM(this.ABSOLUTE_DRAG_OFFSET);
       this.removeCSSTransition();
@@ -318,13 +321,13 @@ export class Dauerlauf {
 
   private resetDecelerating() {
     this.DRAG_RELEASE_SPEED = 0;
-    this.FRAME_COUNT = 0;
+    this.DECELERATION_START = undefined;
     this.PREVIOUSE_TIMESTAMP = undefined;
   }
 
   private cloneCellsWhenNeeded() {
     const numberOfNeededCells =
-      calculateNumberOfNeededCells(this.cellSize, this.containerSize) +
+      calculateNumberOfNeededCells(this.CELL_SIZE, this.CONTAINER_SIZE) +
       this.OPTIONS.overflowItems * 2;
 
     fillUpCells(
@@ -345,14 +348,14 @@ export class Dauerlauf {
 
   private setAnimationDirection(dragSpeed: number) {
     if (dragSpeed < 0) {
-      this.ANIMATING_SPEED = Math.abs(this.ANIMATING_SPEED) * -1;
+      this.OPTIONS.animationSpeed = Math.abs(this.OPTIONS.animationSpeed) * -1;
     } else {
-      this.ANIMATING_SPEED = Math.abs(this.ANIMATING_SPEED);
+      this.OPTIONS.animationSpeed = Math.abs(this.OPTIONS.animationSpeed);
     }
   }
 
   private resize() {
-    this.containerSize = getContainerSize(this.DOM_NODES.container);
+    this.CONTAINER_SIZE = getContainerSize(this.DOM_NODES.container);
 
     //TODO: Real resizing
   }

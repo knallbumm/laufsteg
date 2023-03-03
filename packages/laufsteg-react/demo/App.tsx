@@ -5,7 +5,7 @@ import { Dauerlauf } from '../src/components';
 function App() {
   return (
     <div className="App">
-      <Dauerlauf friction={3}>
+      <Dauerlauf friction={8}>
         <strong className="demo-text-large">WOOOOOOOW</strong>
       </Dauerlauf>
     </div>

@@ -7,6 +7,6 @@ export function setPositionsToCells(
     if (position == undefined || position == null) {
       throw new Error('No cell position known for this cell');
     }
-    cell.style.left = `${position}%`;
+    cell.style.transform = `translateX(${position}%)`;
   }
 }
