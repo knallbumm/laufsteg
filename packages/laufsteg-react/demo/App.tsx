@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Laufsteg } from '../src/components';
 
 function App() {

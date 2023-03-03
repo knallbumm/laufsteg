@@ -27,7 +27,7 @@
     "lint": "eslint . --ext .ts",
     "lint:files": "eslint --ext .ts --max-warnings 0",
     "lint:fix": "npm run lint -- --fix",
-    "typecheck": "tsc --noEmit -p ../../tsconfig.json",
+    "typecheck": "tsc --noEmit -p .",
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },

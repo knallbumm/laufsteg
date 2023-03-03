@@ -1,7 +1,7 @@
 {
   "extends": "@laufsteg/shared/tsconfig.json",
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
     "esModuleInterop": true
   },
   "include": ["**/*.ts", "**/*.tsx"],
