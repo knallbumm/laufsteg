@@ -37,38 +37,38 @@
 
 ```bash
 # pnpm
-pnpm add laufband
+pnpm add laufsteg
 
 # npm
-npm i laufband
+npm i laufsteg
 ```
 
 #### CDN
 
 ```html
-<script src="https://unpkg.com/laufband"></script>
+<script src="https://unpkg.com/laufsteg"></script>
 ```
 
-This exposes Laufband globally via `window.Laufband`
+This exposes laufsteg globally via `window.laufsteg`
 
 ### React
 
 ```bash
 # pnpm
-pnpm add @laufband/react
+pnpm add @laufsteg/react
 
 # npm
-npm i @laufband/react
+npm i @laufsteg/react
 ```
 
 ### Vue
 
 ```bash
 # pnpm
-pnpm add @laufband/vue
+pnpm add @laufsteg/vue
 
 # npm
-npm i @laufband/vue
+npm i @laufsteg/vue
 ```
 
 ## Usage
@@ -80,7 +80,7 @@ For further information please have a look at the concrete adapters:
 - [React](React)
 - [Vue](Vue)
 
-If you want to use Laufband without any framework, or want to write an adapter on your own, you only have to do two simple things:
+If you want to use laufsteg without any framework, or want to write an adapter on your own, you only have to do two simple things:
 
 ### 1. Use this DOM Structure
 
@@ -92,16 +92,16 @@ If you want to use Laufband without any framework, or want to write an adapter o
 </div>
 ```
 
-There can be as many cells, as you want (with the same size). If there are not enough cells to fill the whole screen, Laufband will automatically duplicate cells.
+There can be as many cells, as you want (with the same size). If there are not enough cells to fill the whole screen, laufsteg will automatically duplicate cells.
 
-### 2. Call `createLaufband()`
+### 2. Call `createlaufsteg()`
 
 ```ts
-import { createLaufband } from 'laufband'
+import { createlaufsteg } from 'laufsteg'
 ...
-const options: LaufbandOptions = {...}
+const options: laufstegOptions = {...}
 const container = document.getElementById("laufsteg-sample-1")
-const laufband = createLaufband(container, options)
+const laufsteg = createlaufsteg(container, options)
 ...
 ```
 
