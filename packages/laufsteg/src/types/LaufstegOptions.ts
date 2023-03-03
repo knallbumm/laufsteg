@@ -1,4 +1,4 @@
-export interface DauerlaufOptions {
+export interface LaufstegOptions {
   /** Initial pixel-offset of the items. Positive values: scrolled to the right, negative values: scrolled to the left. */
   offset: number;
 

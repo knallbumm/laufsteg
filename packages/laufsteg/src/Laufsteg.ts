@@ -1,6 +1,6 @@
 import type {
   Callbacks,
-  DauerlaufOptions,
+  LaufstegOptions,
   OnDecelerationEnd,
   OnDecelerationStart,
   OnDragEnd,
@@ -23,14 +23,14 @@ import { prepareCellPositions } from './utils/prepareCellPositions';
 import { setPositionsToCells as applyCellPositions } from './utils/setPositionsToCells';
 import { setTrolleySize } from './utils/setTrolleySize';
 
-export class Dauerlauf implements Partial<Callbacks> {
+export class Laufsteg implements Partial<Callbacks> {
   private DOM_NODES: {
     container: HTMLDivElement;
     trolley: HTMLDivElement;
     cells: Cells;
   };
 
-  private OPTIONS: DauerlaufOptions;
+  private OPTIONS: LaufstegOptions;
 
   private STATE?: 'CSS_ANIMATING' | 'DECLERATING' | 'DRAGGING' = undefined;
 
@@ -60,7 +60,7 @@ export class Dauerlauf implements Partial<Callbacks> {
   public onDecelerationStart?: OnDecelerationStart;
   public onDecelerationEnd?: OnDecelerationEnd;
 
-  constructor(container: HTMLDivElement, options: Partial<DauerlaufOptions>) {
+  constructor(container: HTMLDivElement, options: Partial<LaufstegOptions>) {
     this.OPTIONS = {
       offset: options.offset ?? 0,
       draggable: options.draggable ?? true,

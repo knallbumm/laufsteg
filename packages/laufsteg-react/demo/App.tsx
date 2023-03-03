@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Dauerlauf } from '../src/components';
+import { Laufsteg } from '../src/components';
 
 function App() {
   return (
     <div className="App">
-      <Dauerlauf friction={8}>
+      <Laufsteg friction={8}>
         <strong className="demo-text-large">WOOOOOOOW</strong>
-      </Dauerlauf>
+      </Laufsteg>
     </div>
   );
 }

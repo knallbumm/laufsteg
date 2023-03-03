@@ -1,16 +1,16 @@
 import type {
   Callbacks,
-  DauerlaufOptions,
+  LaufstegOptions,
   OnDecelerationEnd,
   OnDecelerationStart,
   OnDragEnd,
   OnDragStart,
 } from 'laufsteg';
-import { createDauerlauf } from 'laufsteg';
+import { createLaufsteg } from 'laufsteg';
 import type { PropsWithChildren } from 'react';
 import React, { Children, useCallback, useEffect, useRef } from 'react';
 
-export function Dauerlauf({
+export function Laufsteg({
   children,
   onDragStart,
   onDragEnd,
@@ -18,9 +18,9 @@ export function Dauerlauf({
   onDecelerationEnd,
   ...props
 }: PropsWithChildren<
-  Partial<DauerlaufOptions> & Partial<Callbacks>
+  Partial<LaufstegOptions> & Partial<Callbacks>
 >): React.ReactElement {
-  const laufsteg = useRef<ReturnType<typeof createDauerlauf> | undefined>();
+  const laufsteg = useRef<ReturnType<typeof createLaufsteg> | undefined>();
   const container = useRef<HTMLDivElement | null>(null);
 
   const handleDragStart = useCallback(
@@ -53,7 +53,7 @@ export function Dauerlauf({
 
   useEffect(() => {
     if (container.current && !laufsteg.current) {
-      laufsteg.current = createDauerlauf(container.current, props);
+      laufsteg.current = createLaufsteg(container.current, props);
       laufsteg.current.onDragStart = onDragStart && handleDragStart;
       laufsteg.current.onDragEnd = onDragEnd && handleDragEnd;
       laufsteg.current.onDecelerationStart =
