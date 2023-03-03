@@ -1,1 +1,1 @@
-export * from './Laufsteg';
+export * from './Dauerlauf';
