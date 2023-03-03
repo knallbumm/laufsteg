@@ -94,14 +94,14 @@ If you want to use laufsteg without any framework, or want to write an adapter o
 
 There can be as many cells, as you want (with the same size). If there are not enough cells to fill the whole screen, laufsteg will automatically duplicate cells.
 
-### 2. Call `createlaufsteg()`
+### 2. Call `createLaufsteg()`
 
 ```ts
-import { createlaufsteg } from 'laufsteg'
+import { createLaufsteg } from 'laufsteg'
 ...
 const options: laufstegOptions = {...}
 const container = document.getElementById("laufsteg-sample-1")
-const laufsteg = createlaufsteg(container, options)
+const laufsteg = createLaufsteg(container, options)
 ...
 ```
 
