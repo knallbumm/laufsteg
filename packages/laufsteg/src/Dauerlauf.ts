@@ -31,21 +31,21 @@ export class Dauerlauf {
 
   private CELL_POSITITIONS: number[] = [];
 
-  private ABSOLUTE_DRAG_OFFSET = 0;
+  private SAVED_DRAG_OFFSET = 0;
 
   private CURRENT_DRAG_START_X?: number = undefined;
-  private CURRENT_DRAG_OFFSET?: number = undefined;
+  private CURRENT_DRAG_TRAVEL?: number = undefined;
 
   private DRAG_RELEASE_SPEED = 0;
 
-  private NEXT_ANIMATION_STEP = 0;
+  private CSS_ANIMATION_DESTINATION = 0;
 
-  private LAST_KNOWN_SPEEDS: number[] = [];
+  private LAST_SPEEDS: number[] = [];
 
   private LAST_MOVE_TIMESTAMP = 0;
 
   private DECELERATION_START: number | undefined = undefined;
-  private PREVIOUSE_TIMESTAMP: number | undefined = undefined;
+  private LAST_DECELERATION_FRAME_TIMESTAMP: number | undefined = undefined;
 
   constructor(container: HTMLDivElement, options: Partial<DauerlaufOptions>) {
     this.OPTIONS = {
@@ -113,7 +113,7 @@ export class Dauerlauf {
     this.DOM_NODES.trolley.addEventListener('touchcancel', this.draggingEnded);
 
     this.DOM_NODES.trolley.addEventListener('transitionend', () => {
-      this.ABSOLUTE_DRAG_OFFSET = this.NEXT_ANIMATION_STEP;
+      this.SAVED_DRAG_OFFSET = this.CSS_ANIMATION_DESTINATION;
       this.startCSSAnimation();
     });
 
@@ -143,13 +143,13 @@ export class Dauerlauf {
 
     const timeDeltaSinceLastMove = performance.now() - this.LAST_MOVE_TIMESTAMP;
 
-    const lastMoveDragOffset = this.CURRENT_DRAG_OFFSET ?? 0;
+    const lastMoveDragOffset = this.CURRENT_DRAG_TRAVEL ?? 0;
     const dragXPosition = getEventXPosition(event);
-    this.CURRENT_DRAG_OFFSET = dragXPosition - (this.CURRENT_DRAG_START_X ?? 0);
+    this.CURRENT_DRAG_TRAVEL = dragXPosition - (this.CURRENT_DRAG_START_X ?? 0);
 
     this.LAST_MOVE_TIMESTAMP = performance.now();
 
-    const travelSinceLastMove = lastMoveDragOffset - this.CURRENT_DRAG_OFFSET;
+    const travelSinceLastMove = lastMoveDragOffset - this.CURRENT_DRAG_TRAVEL;
 
     this.logSpeed(timeDeltaSinceLastMove, travelSinceLastMove);
 
@@ -159,9 +159,9 @@ export class Dauerlauf {
   };
 
   private draggingEnded = () => {
-    this.ABSOLUTE_DRAG_OFFSET += this.CURRENT_DRAG_OFFSET ?? 0;
+    this.SAVED_DRAG_OFFSET += this.CURRENT_DRAG_TRAVEL ?? 0;
 
-    this.setOffsetToDOM(this.ABSOLUTE_DRAG_OFFSET);
+    this.setOffsetToDOM(this.SAVED_DRAG_OFFSET);
 
     const dragReleaseSpeed = this.getSpeedAvg();
     this.setAnimationDirection(dragReleaseSpeed);
@@ -220,20 +220,21 @@ export class Dauerlauf {
     }
   }
 
-  private beginDeceleration(newTime: number) {
+  private beginDeceleration(frameTimestamp: number) {
     let delta = 20; // TODO: Find better implementation for this random value
-    if (this.PREVIOUSE_TIMESTAMP) {
-      delta = newTime - this.PREVIOUSE_TIMESTAMP;
+    if (this.LAST_DECELERATION_FRAME_TIMESTAMP) {
+      delta = frameTimestamp - this.LAST_DECELERATION_FRAME_TIMESTAMP;
     } else {
       this.DECELERATION_START = performance.now();
     }
-    this.PREVIOUSE_TIMESTAMP = newTime;
+    this.LAST_DECELERATION_FRAME_TIMESTAMP = frameTimestamp;
 
-    const finalSpeed = !this.CURRENT_DRAG_OFFSET
+    const finalSpeed = !this.CURRENT_DRAG_TRAVEL
       ? this.OPTIONS.animationSpeed
       : 0;
 
-    const progress = (newTime - (this.DECELERATION_START ?? newTime)) * 0.05;
+    const progress =
+      (frameTimestamp - (this.DECELERATION_START ?? frameTimestamp)) * 0.05;
 
     const currentSpeed =
       this.DRAG_RELEASE_SPEED *
@@ -242,7 +243,7 @@ export class Dauerlauf {
 
     const pixelTravel = currentSpeed / (1000 / delta);
 
-    this.setOffsetToDOM((this.ABSOLUTE_DRAG_OFFSET -= pixelTravel));
+    this.setOffsetToDOM((this.SAVED_DRAG_OFFSET -= pixelTravel));
 
     this.rearrangeCellsIfNeeded();
 
@@ -264,10 +265,10 @@ export class Dauerlauf {
     // TODO: Handle state when is decelerating
     this.STATE = 'CSS_ANIMATING';
 
-    this.NEXT_ANIMATION_STEP =
-      this.ABSOLUTE_DRAG_OFFSET - this.OPTIONS.animationSpeed;
+    this.CSS_ANIMATION_DESTINATION =
+      this.SAVED_DRAG_OFFSET - this.OPTIONS.animationSpeed;
     this.addCSSTransition();
-    this.setOffsetToDOM(this.NEXT_ANIMATION_STEP);
+    this.setOffsetToDOM(this.CSS_ANIMATION_DESTINATION);
 
     this.rearrangeCellsIfNeeded();
   }
@@ -275,7 +276,7 @@ export class Dauerlauf {
   private stopCSSAnimation() {
     if (this.STATE == 'CSS_ANIMATING') {
       this.captureCurrentOffset();
-      this.setOffsetToDOM(this.ABSOLUTE_DRAG_OFFSET);
+      this.setOffsetToDOM(this.SAVED_DRAG_OFFSET);
       this.removeCSSTransition();
     }
   }
@@ -302,7 +303,7 @@ export class Dauerlauf {
     }
 
     const clientRect = this.DOM_NODES.trolley?.getBoundingClientRect();
-    this.ABSOLUTE_DRAG_OFFSET = clientRect.x;
+    this.SAVED_DRAG_OFFSET = clientRect.x;
   }
 
   private logSpeed(
@@ -312,17 +313,17 @@ export class Dauerlauf {
     const speedSinceLastMove = Math.round(
       (travelSinceLastMove / timeDeltaSinceLastMove) * 1000
     );
-    this.LAST_KNOWN_SPEEDS.push(speedSinceLastMove);
+    this.LAST_SPEEDS.push(speedSinceLastMove);
 
-    if (this.LAST_KNOWN_SPEEDS.length > 5) {
-      this.LAST_KNOWN_SPEEDS.shift();
+    if (this.LAST_SPEEDS.length > 5) {
+      this.LAST_SPEEDS.shift();
     }
   }
 
   private resetDecelerating() {
     this.DRAG_RELEASE_SPEED = 0;
     this.DECELERATION_START = undefined;
-    this.PREVIOUSE_TIMESTAMP = undefined;
+    this.LAST_DECELERATION_FRAME_TIMESTAMP = undefined;
   }
 
   private cloneCellsWhenNeeded() {
@@ -341,8 +342,7 @@ export class Dauerlauf {
 
   private getSpeedAvg() {
     return (
-      this.LAST_KNOWN_SPEEDS.reduce((p, c) => p + c, 0) /
-      this.LAST_KNOWN_SPEEDS.length
+      this.LAST_SPEEDS.reduce((p, c) => p + c, 0) / this.LAST_SPEEDS.length
     );
   }
 
@@ -362,11 +362,11 @@ export class Dauerlauf {
 
   private resetDrag() {
     this.CURRENT_DRAG_START_X = undefined;
-    this.CURRENT_DRAG_OFFSET = undefined;
-    this.LAST_KNOWN_SPEEDS = [];
+    this.CURRENT_DRAG_TRAVEL = undefined;
+    this.LAST_SPEEDS = [];
   }
 
   get offset() {
-    return this.ABSOLUTE_DRAG_OFFSET + (this.CURRENT_DRAG_OFFSET ?? 0);
+    return this.SAVED_DRAG_OFFSET + (this.CURRENT_DRAG_TRAVEL ?? 0);
   }
 }
