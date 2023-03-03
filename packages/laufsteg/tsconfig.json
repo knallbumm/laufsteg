@@ -1,0 +1,5 @@
+{
+  "extends": "@laufsteg/shared/tsconfig.json",
+  "include": ["**/*.ts", "src/styles/main.css"],
+  "exclude": ["**/*.test.ts"]
+}

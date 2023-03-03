@@ -1,0 +1,38 @@
+{
+  "name": "laufsteg",
+  "description": "Easy to use infinite moving div",
+  "version": "0.0.1",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "author": "Luis Haitzer<https://github.com/quintus-luis>",
+  "repository": {
+    "url": "https://github.com/knallbumm/pinsel"
+  },
+  "homepage": "https://github.com/knallbumm/pinsel#readme",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.mjs",
+    "default": "./dist/index.mjs"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "unpkg": "./dist/index.iife.min.js",
+  "jsdelivr": "./dist/index.iife.min.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "rimraf dist/ && rollup --c",
+    "lint": "eslint . --ext .ts",
+    "lint:files": "eslint --ext .ts --max-warnings 0",
+    "lint:fix": "npm run lint -- --fix",
+    "typecheck": "tsc --noEmit -p ../../tsconfig.json",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@laufsteg/shared": "workspace:*",
+    "@vitejs/plugin-react": "^3.1.0"
+  }
+}

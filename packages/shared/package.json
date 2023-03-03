@@ -1,0 +1,8 @@
+{
+  "name": "@laufsteg/shared",
+  "private": true,
+  "type": "module",
+  "files": [
+    "*"
+  ]
+}
