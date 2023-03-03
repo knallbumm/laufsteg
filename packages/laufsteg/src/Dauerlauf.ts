@@ -1,6 +1,14 @@
-import type { DauerlaufOptions } from './types';
+import type {
+  Callbacks,
+  DauerlaufOptions,
+  OnDecelerationEnd,
+  OnDecelerationStart,
+  OnDragEnd,
+  OnDragStart,
+} from './types';
 import type { Cells } from './types/Cells';
 import type { Size } from './types/Size';
+import { applyCursors } from './utils/applyCursors';
 import { calculateNumberOfNeededCells } from './utils/calculateNumberOfNeededCells';
 import { calculateOverdoses } from './utils/calculateOverdoses';
 import { extractCells } from './utils/extractCells';
@@ -15,7 +23,7 @@ import { prepareCellPositions } from './utils/prepareCellPositions';
 import { setPositionsToCells as applyCellPositions } from './utils/setPositionsToCells';
 import { setTrolleySize } from './utils/setTrolleySize';
 
-export class Dauerlauf {
+export class Dauerlauf implements Partial<Callbacks> {
   private DOM_NODES: {
     container: HTMLDivElement;
     trolley: HTMLDivElement;
@@ -46,6 +54,11 @@ export class Dauerlauf {
 
   private DECELERATION_START: number | undefined = undefined;
   private LAST_DECELERATION_FRAME_TIMESTAMP: number | undefined = undefined;
+
+  public onDragStart?: OnDragStart;
+  public onDragEnd?: OnDragEnd;
+  public onDecelerationStart?: OnDecelerationStart;
+  public onDecelerationEnd?: OnDecelerationEnd;
 
   constructor(container: HTMLDivElement, options: Partial<DauerlaufOptions>) {
     this.OPTIONS = {
@@ -79,6 +92,8 @@ export class Dauerlauf {
     applyCellPositions(this.DOM_NODES.cells, this.CELL_POSITITIONS);
 
     this.addEventListeners();
+
+    applyCursors(container, this.OPTIONS.cursor, this.isDragging);
 
     this.start();
   }
@@ -131,13 +146,16 @@ export class Dauerlauf {
 
     this.CURRENT_DRAG_START_X = getEventXPosition(event);
     this.LAST_MOVE_TIMESTAMP = performance.now();
+    applyCursors(
+      this.DOM_NODES.container,
+      this.OPTIONS.cursor,
+      this.isDragging
+    );
+    this.onDragStart?.(this.offset);
   };
 
   private draggingMoved = (event: MouseEvent | TouchEvent) => {
-    const isCurrentlyDragging =
-      this.CURRENT_DRAG_START_X != undefined && this.STATE == 'DRAGGING';
-
-    if (!isCurrentlyDragging) {
+    if (!this.isDragging) {
       return;
     }
 
@@ -169,8 +187,15 @@ export class Dauerlauf {
 
     this.resetDrag();
 
+    this.onDragEnd?.(this.offset);
     this.STATE = 'DECLERATING';
 
+    applyCursors(
+      this.DOM_NODES.container,
+      this.OPTIONS.cursor,
+      this.isDragging
+    );
+    this.onDecelerationStart?.(this.offset, dragReleaseSpeed);
     this.beginDeceleration(performance.now());
   };
 
@@ -255,6 +280,7 @@ export class Dauerlauf {
       } else {
         this.resetDecelerating();
         this.startCSSAnimation();
+        this.onDecelerationEnd?.(this.offset);
       }
     } else {
       this.resetDecelerating();
@@ -367,6 +393,10 @@ export class Dauerlauf {
   }
 
   get offset() {
-    return this.SAVED_DRAG_OFFSET + (this.CURRENT_DRAG_TRAVEL ?? 0);
+    return Math.round(this.SAVED_DRAG_OFFSET + (this.CURRENT_DRAG_TRAVEL ?? 0));
+  }
+
+  get isDragging() {
+    return this.CURRENT_DRAG_START_X != undefined && this.STATE == 'DRAGGING';
   }
 }
