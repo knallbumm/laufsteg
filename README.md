@@ -20,7 +20,7 @@
 - 🎁 Many more little things that make developers happy
 
 ## Open TODOs / Currently not supported
-
+If you want to help us with this, please have a look at our [Contribution](#contributing) section
 - 📏 Variable cell sizes
 - 🔥 Updating options after initializing
 
