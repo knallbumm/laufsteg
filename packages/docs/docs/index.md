@@ -2,15 +2,18 @@
 layout: home
 
 hero:
-  name: Pinsel.js
+  name: laufsteg
 
-  tagline: A lightweight, framework agnostic 2D drawing libary with focus on performance and developer experience.
+  tagline: Endless draggable carousel with focus on performance and usability.
   actions:
     - theme: brand
       text: Get Started
-      link: /guide/what-is-vitepress
+      link: /docs/
     - theme: alt
       text: View on GitHub
+      link: https://github.com/knallbumm/laufsteg
+    - theme: alt
+      text: See demo
       link: https://github.com/vuejs/vitepress
 
 features:

@@ -4,17 +4,8 @@
 }
 
 body {
-  font-family: "IBMPlexSans";
+  font-family: 'Rubik';
   font-size: 1.1rem;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Fraunces";
 }
 
 ::selection {
@@ -23,34 +14,15 @@ h6 {
 }
 
 @font-face {
-  font-family: "Fraunces";
-  src: url("/Fraunces-Variable.ttf");
-}
-
-@font-face {
-  font-family: "IBMPlexSans";
-  src: url("/IBMPlexSans-Regular.ttf");
+  font-family: 'Rubik';
+  src: url('/Rubik-Regular.woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "IBMPlexSans";
-  src: url("/IBMPlexSans-Bold.ttf");
+  font-family: 'Rubik';
+  src: url('/Rubik-Bold.woff2');
   font-weight: 700;
   font-style: normal;
-}
-
-@font-face {
-  font-family: "IBMPlexSans";
-  src: url("/IBMPlexSans-Italic.ttf");
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "IBMPlexSans";
-  src: url("/IBMPlexSans-BoldItalic.ttf");
-  font-weight: 700;
-  font-style: italic;
 }
