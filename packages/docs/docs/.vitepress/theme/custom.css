@@ -1,6 +1,9 @@
 :root {
-  --vp-c-brand: #ff006b;
-  --vp-c-brand-light: #ff006b;
+  --vp-c-brand: #52f8c6;
+  --vp-c-brand-light: #c8f8ea;
+  --vp-button-brand-text: black;
+   --vp-button-brand-hover-text: black;
+  --vp-button-brand-hover-bg: #42c69e;
 }
 
 body {
@@ -9,8 +12,8 @@ body {
 }
 
 ::selection {
-  background-color: #ffc02d;
-  color: black;
+  background-color: #c8f8ea;
+  color: black !important;
 }
 
 @font-face {

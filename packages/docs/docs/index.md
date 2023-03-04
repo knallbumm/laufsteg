@@ -4,7 +4,7 @@ layout: home
 hero:
   name: laufsteg
 
-  tagline: Endless draggable carousel with focus on performance and usability.
+  tagline: Endless draggable carousel with focus on performance & usability.
   actions:
     - theme: brand
       text: Get Started

@@ -1,7 +1,7 @@
 <img src="./laufsteg-header-image.jpg"/>
 
 <h1 align="center" style="margin-top:1rem">laufsteg.js</h1>
-<h4 align="center">Endless draggable carousel with focus on performance and usability.</h4>
+<h4 align="center">Endless draggable carousel with focus on performance & usability.</h4>
 
 <p align="center" style="margin-top:0.5rem">
   <a href="https://badge.fury.io/js/laufsteg">
