@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      fahrsteg: resolve(__dirname, '../packages/fahrsteg/index.ts'),
+      laufsteg: resolve(__dirname, '../laufsteg/index.ts'),
     },
   },
 });
