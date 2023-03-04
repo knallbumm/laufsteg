@@ -7,7 +7,7 @@ name: Deploy Nuxt site to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: ['main']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -20,7 +20,7 @@ permissions:
 
 # Allow one concurrent deployment
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: true
 
 jobs:
@@ -40,7 +40,7 @@ jobs:
       - name: Install turbo
         run: pnpm i -g turbo
       - name: Static HTML export with Nuxt
-        run: turbo run build --filter=@pinsel/docs
+        run: pnpm run build:docs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
