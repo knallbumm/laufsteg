@@ -3,7 +3,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { defineConfig } from 'rollup';
 import dts from 'rollup-plugin-dts';
 import esbuild from 'rollup-plugin-esbuild';
- import postcss from 'rollup-plugin-postcss';
+import postcss from 'rollup-plugin-postcss';
 
 const iifeName = 'Laufsteg';
 

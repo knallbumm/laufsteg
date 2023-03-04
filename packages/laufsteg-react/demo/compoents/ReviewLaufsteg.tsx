@@ -1,10 +1,10 @@
-import './ReviewLaufband.css';
+import './Reviewlaufsteg.css';
 
 import { useMemo } from 'react';
 
 import { Laufsteg } from '../../src/components';
 
-export function ReviewLaufband(): React.ReactElement {
+export function Reviewlaufsteg(): React.ReactElement {
   const reviews = useMemo(() => {
     return [
       {
@@ -21,7 +21,7 @@ export function ReviewLaufband(): React.ReactElement {
   return (
     <Laufsteg gap={'1rem'}>
       {reviews.map((review) => (
-        <div className="reviewLaufbandCell">
+        <div className="reviewlaufstegCell">
           <strong>{review.title}</strong>
           <p>{review.text}</p>
         </div>

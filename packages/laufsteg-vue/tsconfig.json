@@ -1,0 +1,9 @@
+{
+  "extends": "@laufsteg/shared/tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "esModuleInterop": true
+  },
+  "include": ["**/*.ts", "**/*.tsx", "src/**/*.vue"],
+  "exclude": ["**/*.test.ts"]
+}
