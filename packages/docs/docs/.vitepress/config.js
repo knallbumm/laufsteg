@@ -180,4 +180,5 @@ export default {
     ],
     ["meta", { name: "theme-color", content: "#ffffff" }],
   ],
+  base: '/laufsteg/'
 };
