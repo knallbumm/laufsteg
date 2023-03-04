@@ -1,5 +1,4 @@
 .laufsteg-container {
-  background-color: pink;
   cursor: grab;
   width: 100%;
   overflow: hidden;
@@ -15,10 +14,10 @@
 
 .laufsteg-trolley {
   position: relative;
-  background-color: red;
 }
 
 .laufsteg-cell {
   position: absolute;
   top: 0;
+  padding: 0 calc(var(--laufsteg-cell-gap) / 2);
 }

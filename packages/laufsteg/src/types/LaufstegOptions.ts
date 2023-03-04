@@ -1,3 +1,5 @@
+import type { Gap } from './Gap';
+
 export interface LaufstegOptions {
   /** Initial pixel-offset of the items. Positive values: scrolled to the right, negative values: scrolled to the left. */
   offset: number;
@@ -13,6 +15,9 @@ export interface LaufstegOptions {
 
   /** (Minimum) number of items on each side to make sure there is no blank space — even with fast dragging.  */
   overflowItems: number;
+
+  /** Space between the cells. Either a CSS-Unit-String or a pixel count */
+  gap: Gap;
 
   /** The cursor applied in the different states. When given a string, instead of an object it is used in every state. */
   cursor:

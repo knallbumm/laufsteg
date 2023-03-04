@@ -10,6 +10,12 @@ Of course you can customize laufsteg to fit your exact usecase.
 Some of the properties may not take effect if changed after initializing, because laufsteg is currently not 100% reloadable. We are working on this.
 :::
 
+### gap
+- type: `string | number`
+- default: `0`
+
+Space between the cells. Either a absolute CSS-Unit-String ("3rem", "10px") or a number (in px)
+
 ### offset
 
 - type: `number`

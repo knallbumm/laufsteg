@@ -1,6 +1,6 @@
-> :warning: **This library is still in an early stage of development and should therefore not be used productively at this point! Many things are either not yet implemented or not documented.**
+<img src="./laufsteg-header-image.jpg"/>
 
-<h1 align="center">laufsteg </h1>
+<h1 align="center" style="margin-top:1rem">laufsteg.js</h1>
 <h4 align="center">Endless draggable carousel with focus on performance and usability.</h4>
 
 <p align="center" style="margin-top:0.5rem">

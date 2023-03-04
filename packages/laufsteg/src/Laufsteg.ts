@@ -9,6 +9,7 @@ import type {
 import type { Cells } from './types/Cells';
 import type { Size } from './types/Size';
 import { applyCursors } from './utils/applyCursors';
+import { applyGap } from './utils/applyGap';
 import { calculateNumberOfNeededCells } from './utils/calculateNumberOfNeededCells';
 import { calculateOverdoses } from './utils/calculateOverdoses';
 import { extractCells } from './utils/extractCells';
@@ -67,6 +68,7 @@ export class Laufsteg implements Partial<Callbacks> {
       animationSpeed: options.animationSpeed ?? 100,
       friction: options.friction ?? 8,
       overflowItems: options.overflowItems ?? 1,
+      gap: options.gap ?? 0,
       cursor: options.cursor ?? {
         hover: 'grab',
         dragging: 'grabbing',
@@ -79,6 +81,8 @@ export class Laufsteg implements Partial<Callbacks> {
       trolley,
       cells: extractCells(trolley),
     };
+
+    applyGap(container, this.OPTIONS.gap);
 
     // Sizes the trolley based on the first cell
     const firstCell = this.DOM_NODES.cells[0];
@@ -177,6 +181,10 @@ export class Laufsteg implements Partial<Callbacks> {
   };
 
   private draggingEnded = () => {
+    if (!this.isDragging) {
+      return;
+    }
+
     this.SAVED_DRAG_OFFSET += this.CURRENT_DRAG_TRAVEL ?? 0;
 
     this.setOffsetToDOM(this.SAVED_DRAG_OFFSET);
