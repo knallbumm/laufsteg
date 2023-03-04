@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
 import { createLaufsteg } from 'laufsteg';
+import { ref, watchEffect } from 'vue';
 
 const laufsteg = ref<ReturnType<typeof createLaufsteg>>();
 
