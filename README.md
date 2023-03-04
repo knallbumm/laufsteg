@@ -20,16 +20,15 @@
 - 🎁 Many more little things that make developers happy
 
 ## Open TODOs / Currently not supported
+
 If you want to help us with this, please have a look at our [Contribution](#contributing) section
+
 - 📏 Variable cell sizes
 - 🔥 Updating options after initializing
 
-## Demo Usecases
-
 ## Relevant Links
 
-- [Full Documentation](https://docs.pinsel.xyz)
-- [Examples](https://demo.pinsel.xyz)
+- [Full Documentation](https://knallbumm.github.io/laufsteg/)
 
 ## Installation
 
@@ -115,7 +114,7 @@ The basic idea for this particular way of functioning of this Libary comes from 
 
 ### Contributing
 
-If you want to contribute to Laufsteg, please either open a PR directly, or send a short email with your plans to [hello@smunzl.com](mailto:hello@smunzl.com) 
+If you want to contribute to Laufsteg, please either open a PR directly, or send a short email with your plans to [hello@smunzl.com](mailto:hello@smunzl.com)
 
 We are sure that Laufsteg can be improved a lot and we are looking forward to your ideas!
 
