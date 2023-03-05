@@ -1,5 +1,11 @@
 # laufsteg
 
+## 0.0.4
+
+### Patch Changes
+
+- fae7a14: Better docs and README for npmjs
+
 ## 0.0.3
 
 ### Patch Changes
