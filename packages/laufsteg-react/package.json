@@ -39,7 +39,6 @@
     "vite": "4.1.4"
   },
   "devDependencies": {
-    "@types/react-dom": "^18.0.11",
-    "@laufsteg/shared": "workspace:*"
+    "@types/react-dom": "^18.0.11"
   }
 }
