@@ -31,7 +31,6 @@
     "typecheck": "tsc --noEmit -p ."
   },
   "dependencies": {
-    "@laufsteg/shared": "workspace:*",
     "@types/react": "^18.0.28",
     "@vitejs/plugin-react": "^3.1.0",
     "laufsteg": "workspace:*",
@@ -40,6 +39,7 @@
     "vite": "4.1.4"
   },
   "devDependencies": {
-    "@types/react-dom": "^18.0.11"
+    "@types/react-dom": "^18.0.11",
+    "@laufsteg/shared": "workspace:*"
   }
 }

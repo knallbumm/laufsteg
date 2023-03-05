@@ -28,7 +28,6 @@
     "typecheck": "vue-tsc --noEmit -p ."
   },
   "dependencies": {
-    "@laufsteg/shared": "workspace:*",
     "laufsteg": "workspace:*",
     "vue": "^3.2.40"
   },
@@ -40,6 +39,7 @@
     "eslint-plugin-vue": "^9.9.0",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.2",
-    "vue-tsc": "^1.0.24"
+    "vue-tsc": "^1.0.24",
+    "@laufsteg/shared": "workspace:*"
   }
 }

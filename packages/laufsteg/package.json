@@ -32,7 +32,9 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@laufsteg/shared": "workspace:*",
     "@vitejs/plugin-react": "^3.1.0"
+  },
+  "devDependencies": {
+    "@laufsteg/shared": "workspace:*"
   }
 }
