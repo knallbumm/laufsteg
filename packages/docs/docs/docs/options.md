@@ -11,10 +11,15 @@ Some of the properties may not take effect if changed after initializing, becaus
 :::
 
 ### gap
+
 - type: `string | number`
 - default: `0`
 
 Space between the cells. Either a absolute CSS-Unit-String ("3rem", "10px") or a number (in px)
+
+::: warning
+We are currently not supporting relative units such as `50%` or `20vw`.
+:::
 
 ### offset
 

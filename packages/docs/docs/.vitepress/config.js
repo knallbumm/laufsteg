@@ -3,38 +3,21 @@ export default {
   description: 'Just a laufsteg doing its things',
   themeConfig: {
     siteTile: true,
-    nav: [{ text: 'Docs', link: '/docs/index.html' }],
+    nav: [
+      { text: 'Docs', link: '/docs/index.html' },
+      { text: 'Vue', link: '/docs/basic-usage#Vue' },
+      { text: 'React', link: '/docs/basic-usage#React' },
+    ],
     sidebar: {
       '/docs/': [
         {
-          text: 'General',
           items: [
+            { text: 'General', link: '/docs/index.html' },
+            { text: 'Demo', link: '/docs/Demo' },
             { text: 'Installation', link: '/docs/installation' },
-            { text: 'Usecases', link: '/docs/usecases' },
+            { text: 'Basic Usage', link: '/docs/basic-usage' },
             { text: 'Options', link: '/docs/options' },
             { text: 'Callbacks', link: '/docs/callbacks' },
-          ],
-        },
-
-        {
-          text: 'Adapters',
-          items: [
-            {
-              text: 'React',
-              items: [
-                { text: 'Installation', link: '/docs/react/installation' },
-                { text: 'Circle', link: '/docs/index' },
-                { text: 'Path', link: '/' },
-              ],
-            },
-            {
-              text: 'Vue',
-              items: [
-                { text: 'Installation', link: '/docs/vue/installation' },
-                { text: 'Circle', link: '/docs/index' },
-                { text: 'Path', link: '/' },
-              ],
-            },
           ],
         },
       ],

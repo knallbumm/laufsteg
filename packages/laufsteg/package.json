@@ -23,7 +23,7 @@
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "rimraf dist/ && rollup --c",
+    "build": "rimraf dist/ && rollup --c && cp ../../README.md ./README.md",
     "lint": "eslint . --ext .ts",
     "lint:files": "eslint --ext .ts --max-warnings 0",
     "lint:fix": "npm run lint -- --fix",

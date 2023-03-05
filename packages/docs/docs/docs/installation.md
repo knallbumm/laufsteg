@@ -4,13 +4,15 @@ title: Installation
 
 # Installation
 
+::: info
 Laufsteg itself is framework agnostic and therefore there are seperate packages dependant on the package you are using.
+:::
 
-### Vanilla JS/TS
+## Vanilla JS/TS
 
-This is the "Base-Package". The versions for React and Vue are just wrappers for it.
+Base package that can be used in Vanilla TS/JS projects.
 
-#### Package-Manager
+### Package-Manager
 
 ```bash
 # pnpm
@@ -20,7 +22,7 @@ pnpm add laufsteg
 npm i laufsteg
 ```
 
-#### CDN
+### CDN
 
 ```html
 <script src="https://unpkg.com/laufsteg"></script>
@@ -28,12 +30,13 @@ npm i laufsteg
 
 This exposes laufsteg globally via `window.laufsteg`
 
-### React
+## React
 
-#### Package
+Wrapper component for React.
+
+### Package
 
 ```bash
-
 # pnpm
 pnpm add laufsteg-react
 
@@ -41,9 +44,11 @@ pnpm add laufsteg-react
 npm i laufsteg-react
 ```
 
-### Vue
+## Vue
 
-#### Package
+Wrapper component for Vue.
+
+### Package
 
 ```bash
 # pnpm
