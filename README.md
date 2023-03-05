@@ -54,20 +54,20 @@ This exposes laufsteg globally via `window.laufsteg`
 
 ```bash
 # pnpm
-pnpm add @laufsteg/react
+pnpm add laufsteg-react
 
 # npm
-npm i @laufsteg/react
+npm i laufsteg-react
 ```
 
 ### Vue
 
 ```bash
 # pnpm
-pnpm add @laufsteg/vue
+pnpm add laufsteg-vue
 
 # npm
-npm i @laufsteg/vue
+npm i laufsteg-vue
 ```
 
 ## Usage

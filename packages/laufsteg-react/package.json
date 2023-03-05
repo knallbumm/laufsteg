@@ -1,5 +1,5 @@
 {
-  "name": "@laufsteg/react",
+  "name": "laufsteg-react",
   "description": "Simple infinite moving component",
   "version": "0.0.1",
   "type": "module",

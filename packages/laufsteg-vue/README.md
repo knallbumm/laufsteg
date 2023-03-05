@@ -1,1 +1,1 @@
-# Readme for @laufsteg/react
+# Readme for laufsteg-react

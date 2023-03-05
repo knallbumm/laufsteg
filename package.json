@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm -C ./demo run dev ",
-    "dev:react": "turbo dev --filter=@laufsteg/react",
-    "dev:vue": "turbo dev --filter=@laufsteg/vue",
+    "dev:react": "turbo dev --filter=laufsteg-react",
+    "dev:vue": "turbo dev --filter=laufsteg-vue",
     "docs": "turbo dev --filter=@laufsteg/docs",
     "build": "turbo build --filter=!@laufsteg/docs",
     "build:docs": "turbo build --filter=@laufsteg/docs",

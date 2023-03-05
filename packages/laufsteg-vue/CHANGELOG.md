@@ -1,1 +1,1 @@
-# @laufsteg/vue
+# laufsteg-vue
