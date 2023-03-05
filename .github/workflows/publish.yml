@@ -12,22 +12,22 @@ jobs:
       # test_check: true
       npm_registry: https://registry.npmjs.org/
 
-  # publish:
-  #   needs: checks
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: prepare node
-  #       uses: knallbumm/kb-github-actions/.github/actions/prepare-node@pnpm
-  #       with:
-  #         npm_token: ${{ secrets.NPM_TOKEN }}
-  #         npm_registry: https://registry.npmjs.org/
+  publish:
+    needs: checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: prepare node
+        uses: knallbumm/kb-github-actions/.github/actions/prepare-node@pnpm
+        with:
+          npm_token: ${{ secrets.NPM_TOKEN }}
+          npm_registry: https://registry.npmjs.org/
 
-  #     - name: Publish to npm
-  #       id: changesets
-  #       uses: changesets/action@v1
-  #       with:
-  #         publish: pnpm release
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
