@@ -47,7 +47,7 @@ Negative values mean it is animating to left. A positive value will animate it t
 - default: `5`
 
 The friction applied to the cells, after the user stopped dragging them. They start moving in the same speed they got released and then over time slowly adjust to the `animationSpeed`.
-This unitless value controls the duration this process takes. When given `0` they will stay at their drag-speed forever. The higher the value, they stop.
+This unitless value controls the duration this process takes. When given `0` they will stay at their drag-speed forever. The higher the value the faster the animation stops.
 
 For normal usecases a value between `5` and `10` looks fine.
 

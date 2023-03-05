@@ -1,5 +1,5 @@
 import { Laufsteg } from '../src/components';
-import { Reviewlaufsteg } from './compoents/Reviewlaufsteg';
+import { ReviewLaufsteg } from './compoents/ReviewLaufsteg';
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <Laufsteg friction={8}>
         <strong className="demo-text-large">WOOOOOOOW</strong>
       </Laufsteg>
-      <Reviewlaufsteg />
+      <ReviewLaufsteg />
     </div>
   );
 }

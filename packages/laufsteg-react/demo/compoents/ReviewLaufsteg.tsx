@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 import { Laufsteg } from '../../src/components';
 
-export function Reviewlaufsteg(): React.ReactElement {
+export function ReviewLaufsteg(): React.ReactElement {
   const reviews = useMemo(() => {
     return [
       {

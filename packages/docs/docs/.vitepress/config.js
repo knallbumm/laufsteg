@@ -9,7 +9,7 @@ export default {
         {
           text: 'General',
           items: [
-            { text: 'Installation', link: '/docs/index' },
+            { text: 'Installation', link: '/docs/installation' },
             { text: 'Usecases', link: '/docs/usecases' },
             { text: 'Options', link: '/docs/options' },
             { text: 'Callbacks', link: '/docs/callbacks' },
