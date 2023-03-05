@@ -1,8 +1,10 @@
 {
   "extends": "@laufsteg/shared/tsconfig.json",
   "compilerOptions": {
+    "outDir": "dist",
     "jsx": "preserve",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": ["vite/client"]
   },
   "include": ["**/*.ts", "**/*.tsx", "src/**/*.vue"],
   "exclude": ["**/*.test.ts"]
