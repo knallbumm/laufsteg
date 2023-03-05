@@ -8,9 +8,9 @@
   ],
   "author": "Luis Haitzer<https://github.com/quintus-luis>",
   "repository": {
-    "url": "https://github.com/knallbumm/pinsel"
+    "url": "https://github.com/knallbumm/laufsteg"
   },
-  "homepage": "https://github.com/knallbumm/pinsel#readme",
+  "homepage": "https://github.com/knallbumm/laufsteg#readme",
   "exports": {
     "require": "./dist/index.cjs",
     "import": "./dist/index.mjs",
