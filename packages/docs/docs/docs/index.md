@@ -7,7 +7,7 @@ title: General
 ## TL;DR;
 
 Laufsteg helps you create endless horizontal scrolling carousels.\
-It can be used in many ways. To give you a little inspiration, we have put together a few examples [here](/demo).
+It can be used in many ways. To give you a little inspiration, we have put together a few examples [here](/docs/demo).
 
 ## Motivation
 
