@@ -35,5 +35,5 @@ const updateContent = () => {
   laufsteg.value?.rebuild();
 };
 
-defineExpose([updateContent]);
+defineExpose({ updateContent });
 </script>
