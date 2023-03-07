@@ -1,5 +1,13 @@
 # laufsteg
 
+## 0.0.6
+
+### Patch Changes
+
+- e30b192: Fixing vue component and other bugs
+- Updated dependencies [e30b192]
+  - laufsteg@0.0.6
+
 ## 0.0.5
 
 ### Patch Changes
