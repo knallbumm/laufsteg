@@ -1,5 +1,11 @@
 # laufsteg-vue
 
+## 0.0.8
+
+### Patch Changes
+
+- 83fb4e8: small fix
+
 ## 0.0.7
 
 ### Patch Changes
