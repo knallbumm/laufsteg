@@ -22,12 +22,12 @@ watchEffect(() => {
 });
 
 const props = defineProps<{
-  offset: LaufstegOptions['offset'];
-  draggable: LaufstegOptions['draggable'];
-  animationSpeed: LaufstegOptions['animationSpeed'];
-  friction: LaufstegOptions['friction'];
-  overflowItems: LaufstegOptions['overflowItems'];
-  gap: LaufstegOptions['gap'];
-  cursor: LaufstegOptions['cursor'];
+  offset?: LaufstegOptions['offset'];
+  draggable?: LaufstegOptions['draggable'];
+  animationSpeed?: LaufstegOptions['animationSpeed'];
+  friction?: LaufstegOptions['friction'];
+  overflowItems?: LaufstegOptions['overflowItems'];
+  gap?: LaufstegOptions['gap'];
+  cursor?: LaufstegOptions['cursor'];
 }>();
 </script>

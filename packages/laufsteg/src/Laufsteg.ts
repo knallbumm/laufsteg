@@ -90,6 +90,7 @@ export class Laufsteg implements Partial<Callbacks> {
     // Sizes the trolley based on the first cell
     const firstCell = this.DOM_NODES.cells[0];
     this.CELL_SIZE = getCellPixelSize(firstCell);
+    console.log(this.CELL_SIZE, 'CELL SIZE');
     this.applyItemSize();
 
     applyCellPositions(this.DOM_NODES.cells, this.CELL_POSITITIONS);
@@ -329,7 +330,7 @@ export class Laufsteg implements Partial<Callbacks> {
     if (!this.DOM_NODES.trolley) {
       return;
     }
-    this.DOM_NODES.trolley.style.transition = `all 1s linear`;
+    this.DOM_NODES.trolley.style.transition = `transform 1s linear`;
   }
 
   private removeCSSTransition() {
