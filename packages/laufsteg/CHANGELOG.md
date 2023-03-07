@@ -1,5 +1,11 @@
 # laufsteg
 
+## 0.0.5
+
+### Patch Changes
+
+- 6de518e: Improving vue package & fixing bugs with resized items
+
 ## 0.0.4
 
 ### Patch Changes
