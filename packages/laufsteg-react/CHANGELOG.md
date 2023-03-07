@@ -1,5 +1,13 @@
 # laufsteg
 
+## 0.0.7
+
+### Patch Changes
+
+- 09312b9: Improving reactivity
+- Updated dependencies [09312b9]
+  - laufsteg@0.0.7
+
 ## 0.0.6
 
 ### Patch Changes
