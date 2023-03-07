@@ -7,6 +7,9 @@
     "build": "vitepress build docs",
     "preview": "vitepress preview docs"
   },
+  "dependencies": {
+    "laufsteg-vue": "workspace:*"
+  },
   "devDependencies": {
     "vitepress": "1.0.0-alpha.49",
     "vue": "^3.2.45"
