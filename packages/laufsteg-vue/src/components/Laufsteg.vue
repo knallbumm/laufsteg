@@ -30,4 +30,10 @@ const props = defineProps<{
   gap?: LaufstegOptions['gap'];
   cursor?: LaufstegOptions['cursor'];
 }>();
+
+const updateContent = () => {
+  laufsteg.value?.rebuild();
+};
+
+defineExpose([updateContent]);
 </script>
