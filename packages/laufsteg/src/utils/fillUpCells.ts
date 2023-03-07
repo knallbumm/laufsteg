@@ -9,6 +9,10 @@ export function fillUpCells(
 
   const numberOfCellsToClone = numberOfNeededCells - filledCells.length;
 
+  if (numberOfCellsToClone <= 0) {
+    return;
+  }
+
   for (let i = 0; i < numberOfCellsToClone; i++) {
     const clonedCell = cells[i % cells.length].cloneNode(
       true

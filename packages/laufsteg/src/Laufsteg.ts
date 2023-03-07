@@ -22,7 +22,11 @@ import { getCellPixelSize } from './utils/getCellPixelSize';
 import { getContainerSize } from './utils/getContainerSize';
 import { getEventXPosition } from './utils/getEventXPosition';
 import { prepareCellPositions } from './utils/prepareCellPositions';
-import { setPositionsToCells as applyCellPositions } from './utils/setPositionsToCells';
+import { removeAllClones } from './utils/removeAllClones';
+import {
+  setPositionsToCells as applyCellPositions,
+  setPositionsToCells,
+} from './utils/setPositionsToCells';
 import { setTrolleySize } from './utils/setTrolleySize';
 
 export class Laufsteg implements Partial<Callbacks> {
@@ -90,7 +94,6 @@ export class Laufsteg implements Partial<Callbacks> {
     // Sizes the trolley based on the first cell
     const firstCell = this.DOM_NODES.cells[0];
     this.CELL_SIZE = getCellPixelSize(firstCell);
-    console.log(this.CELL_SIZE, 'CELL SIZE');
     this.applyItemSize();
 
     applyCellPositions(this.DOM_NODES.cells, this.CELL_POSITITIONS);
@@ -318,11 +321,17 @@ export class Laufsteg implements Partial<Callbacks> {
     this.rearrangeCellsIfNeeded();
   }
 
-  private stopCSSAnimation() {
+  private stopCSSAnimation(offset?: number) {
     if (this.STATE == 'CSS_ANIMATING') {
-      this.captureCurrentOffset();
+      if (offset === undefined) {
+        this.captureCurrentOffset();
+      } else {
+        this.SAVED_DRAG_OFFSET = offset;
+      }
+
       this.setOffsetToDOM(this.SAVED_DRAG_OFFSET);
       this.removeCSSTransition();
+      this.CSS_ANIMATION_DESTINATION = 0;
     }
   }
 
@@ -404,6 +413,7 @@ export class Laufsteg implements Partial<Callbacks> {
     this.CONTAINER_SIZE = getContainerSize(this.DOM_NODES.container);
 
     //TODO: Real resizing
+    this.rebuild();
   }
 
   private resetDrag() {
@@ -423,5 +433,19 @@ export class Laufsteg implements Partial<Callbacks> {
   private applyItemSize() {
     setTrolleySize(this.DOM_NODES.trolley, this.CELL_SIZE);
     this.cloneCellsWhenNeeded();
+  }
+
+  public rebuild() {
+    this.stopCSSAnimation(0);
+    removeAllClones(this.DOM_NODES.cells, this.DOM_NODES.trolley);
+    this.DOM_NODES.cells = extractCells(this.DOM_NODES.trolley);
+
+    const firstCell = this.DOM_NODES.cells[0];
+    this.CELL_SIZE = getCellPixelSize(firstCell);
+    this.applyItemSize();
+
+    setPositionsToCells(this.DOM_NODES.cells, this.CELL_POSITITIONS);
+
+    this.startCSSAnimation();
   }
 }
