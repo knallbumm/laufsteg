@@ -8,6 +8,7 @@ import type {
 } from './types';
 import type { Cells } from './types/Cells';
 import type { Size } from './types/Size';
+import { addResizeObserver } from './utils/addResizeObserver';
 import { applyCursors } from './utils/applyCursors';
 import { applyGap } from './utils/applyGap';
 import { calculateNumberOfNeededCells } from './utils/calculateNumberOfNeededCells';
@@ -84,14 +85,12 @@ export class Laufsteg implements Partial<Callbacks> {
 
     applyGap(container, this.OPTIONS.gap);
 
+    this.CONTAINER_SIZE = getContainerSize(container);
+
     // Sizes the trolley based on the first cell
     const firstCell = this.DOM_NODES.cells[0];
     this.CELL_SIZE = getCellPixelSize(firstCell);
-    setTrolleySize(this.DOM_NODES.trolley, this.CELL_SIZE);
-
-    this.CONTAINER_SIZE = getContainerSize(container);
-
-    this.cloneCellsWhenNeeded();
+    this.applyItemSize();
 
     applyCellPositions(this.DOM_NODES.cells, this.CELL_POSITITIONS);
 
@@ -100,6 +99,11 @@ export class Laufsteg implements Partial<Callbacks> {
     applyCursors(container, this.OPTIONS.cursor, this.isDragging);
 
     this.start();
+
+    addResizeObserver(firstCell, () => {
+      this.CELL_SIZE = getCellPixelSize(firstCell);
+      this.applyItemSize();
+    });
   }
 
   public start() {
@@ -278,7 +282,13 @@ export class Laufsteg implements Partial<Callbacks> {
 
     this.setOffsetToDOM((this.SAVED_DRAG_OFFSET -= pixelTravel));
 
-    this.rearrangeCellsIfNeeded();
+    const numberOfItemsToSwitch = Math.ceil(
+      Math.abs(pixelTravel) / this.CELL_SIZE.width
+    );
+
+    for (let i = 0; i < numberOfItemsToSwitch; i++) {
+      this.rearrangeCellsIfNeeded();
+    }
 
     if (this.STATE == 'DECLERATING') {
       if (Math.abs(currentSpeed) > 1 + Math.abs(this.OPTIONS.animationSpeed)) {
@@ -336,8 +346,9 @@ export class Laufsteg implements Partial<Callbacks> {
       );
     }
 
-    const clientRect = this.DOM_NODES.trolley?.getBoundingClientRect();
-    this.SAVED_DRAG_OFFSET = clientRect.x;
+    const containerRect = this.DOM_NODES.container.getBoundingClientRect();
+    const clientRect = this.DOM_NODES.trolley.getBoundingClientRect();
+    this.SAVED_DRAG_OFFSET = clientRect.x - containerRect.x;
   }
 
   private logSpeed(
@@ -406,5 +417,10 @@ export class Laufsteg implements Partial<Callbacks> {
 
   get isDragging() {
     return this.CURRENT_DRAG_START_X != undefined && this.STATE == 'DRAGGING';
+  }
+
+  private applyItemSize() {
+    setTrolleySize(this.DOM_NODES.trolley, this.CELL_SIZE);
+    this.cloneCellsWhenNeeded();
   }
 }

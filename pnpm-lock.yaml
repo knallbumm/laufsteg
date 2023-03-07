@@ -63,8 +63,11 @@ importers:
 
   packages/docs:
     specifiers:
+      laufsteg-vue: workspace:*
       vitepress: 1.0.0-alpha.49
       vue: ^3.2.45
+    dependencies:
+      laufsteg-vue: link:../laufsteg-vue
     devDependencies:
       vitepress: 1.0.0-alpha.49
       vue: 3.2.45

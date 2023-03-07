@@ -1,3 +1,4 @@
+import type { Cursor } from './Cursor';
 import type { Gap } from './Gap';
 
 export interface LaufstegOptions {
@@ -20,10 +21,5 @@ export interface LaufstegOptions {
   gap: Gap;
 
   /** The cursor applied in the different states. When given a string, instead of an object it is used in every state. */
-  cursor:
-    | string
-    | {
-        hover: string;
-        dragging: string;
-      };
+  cursor: Cursor;
 }

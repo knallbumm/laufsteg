@@ -7,10 +7,10 @@ title: Demo
 Laufsteg can be used in many ways and for many things. To show you some of them, we created a brief list.
 
 <script setup>
-import Sample from '../components/Sample.vue'
+import {Laufsteg, LaufstegCell} from 'laufsteg-vue'
 </script>
 
-<Sample/>
+<Laufsteg gap="1rem" :animationSpeed="0"><LaufstegCell>test</LaufstegCell> </Laufsteg>
 
 ::: warning
 This page is not done yet. We will add samples later.
