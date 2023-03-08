@@ -21,6 +21,6 @@
       "laufsteg": ["./packages/laufsteg/index.ts"]
     }
   },
-  "include": ["vite-env.d.ts", "packages/**/*.ts"],
+  "include": ["vite-env.d.ts", "packages/**/*.ts", "demo/**/*.ts"],
   "exclude": ["node_modules", "**/*.test.ts", "**/dist"]
 }

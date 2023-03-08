@@ -8,6 +8,7 @@
     "preview": "vitepress preview docs"
   },
   "dependencies": {
+    "@algolia/client-search": "^4.15.0",
     "laufsteg-vue": "workspace:*"
   },
   "devDependencies": {
