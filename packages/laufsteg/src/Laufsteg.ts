@@ -61,8 +61,6 @@ export class Laufsteg implements Partial<Callbacks> {
   private DECELERATION_START: number | undefined = undefined;
   private LAST_DECELERATION_FRAME_TIMESTAMP: number | undefined = undefined;
 
-  private RESIZE_OBSERVER?: ResizeObserver = undefined;
-
   public onDragStart?: OnDragStart;
   public onDragEnd?: OnDragEnd;
   public onDecelerationStart?: OnDecelerationStart;
@@ -110,7 +108,7 @@ export class Laufsteg implements Partial<Callbacks> {
 
     this.start();
 
-    this.RESIZE_OBSERVER = addResizeObserver(firstCell, () => {
+    addResizeObserver(firstCell, () => {
       this.CELL_SIZE = getCellPixelSize(firstCell);
       this.applyItemSize();
     });
@@ -442,7 +440,6 @@ export class Laufsteg implements Partial<Callbacks> {
   }
 
   public rebuild() {
-    this.RESIZE_OBSERVER?.disconnect();
     this.stopCSSAnimation(0);
     removeAllClones(this.DOM_NODES.cells, this.DOM_NODES.trolley);
     this.DOM_NODES.cells = extractCells(this.DOM_NODES.trolley);
