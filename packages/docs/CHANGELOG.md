@@ -1,5 +1,12 @@
 # @laufsteg/docs
 
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies [df7cb91]
+  - laufsteg-vue@0.0.9
+
 ## 0.0.8
 
 ### Patch Changes

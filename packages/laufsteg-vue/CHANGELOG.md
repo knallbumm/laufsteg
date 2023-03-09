@@ -1,5 +1,13 @@
 # laufsteg-vue
 
+## 0.0.9
+
+### Patch Changes
+
+- df7cb91: Improved stability
+- Updated dependencies [df7cb91]
+  - laufsteg@0.0.8
+
 ## 0.0.8
 
 ### Patch Changes
