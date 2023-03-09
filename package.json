@@ -7,6 +7,7 @@
     "dev": "pnpm -C ./demo run dev ",
     "dev:react": "turbo dev --filter=laufsteg-react",
     "dev:vue": "turbo dev --filter=laufsteg-vue",
+    "dev:clean": "(cd ./demo && pnpm run dev)",
     "docs": "turbo dev --filter=@laufsteg/docs",
     "build": "turbo build --filter=!@laufsteg/docs",
     "build:docs": "turbo build --filter=@laufsteg/docs",

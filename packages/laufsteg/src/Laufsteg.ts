@@ -158,6 +158,7 @@ export class Laufsteg implements Partial<Callbacks> {
     this.resetDecelerating();
 
     this.CURRENT_DRAG_START_X = getEventXPosition(event);
+    this.CURRENT_DRAG_TRAVEL = 0;
     this.LAST_MOVE_TIMESTAMP = performance.now();
     applyCursors(
       this.DOM_NODES.container,
@@ -202,18 +203,19 @@ export class Laufsteg implements Partial<Callbacks> {
     this.setAnimationDirection(dragReleaseSpeed);
     this.DRAG_RELEASE_SPEED = dragReleaseSpeed;
 
-    this.resetDrag();
-
     this.onDragEnd?.(this.offset);
+
     this.STATE = 'DECLERATING';
+    this.onDecelerationStart?.(this.offset, dragReleaseSpeed);
+    this.beginDeceleration(performance.now());
+
+    this.resetDrag();
 
     applyCursors(
       this.DOM_NODES.container,
       this.OPTIONS.cursor,
       this.isDragging
     );
-    this.onDecelerationStart?.(this.offset, dragReleaseSpeed);
-    this.beginDeceleration(performance.now());
   };
 
   private setOffsetToDOM(offset: number) {
@@ -278,11 +280,23 @@ export class Laufsteg implements Partial<Callbacks> {
     const progress =
       (frameTimestamp - (this.DECELERATION_START ?? frameTimestamp)) * 0.05;
 
-    const currentSpeed =
-      this.DRAG_RELEASE_SPEED *
-        Math.pow(0.99, progress * this.OPTIONS.friction) +
-      finalSpeed;
+    let currentSpeed = 0;
 
+    const releasedFasterThanAnimation =
+      Math.abs(this.DRAG_RELEASE_SPEED) > Math.abs(this.OPTIONS.animationSpeed);
+    if (releasedFasterThanAnimation) {
+      currentSpeed =
+        this.DRAG_RELEASE_SPEED *
+          Math.pow(0.99, progress * this.OPTIONS.friction) +
+        finalSpeed;
+    } else {
+      const safeReleaseSpeed =
+        this.DRAG_RELEASE_SPEED != 0 && !isNaN(this.DRAG_RELEASE_SPEED)
+          ? this.DRAG_RELEASE_SPEED
+          : 1;
+      currentSpeed =
+        safeReleaseSpeed * 0.1 * Math.pow(progress * this.OPTIONS.friction, 3);
+    }
     const pixelTravel = currentSpeed / (1000 / delta);
 
     this.setOffsetToDOM((this.SAVED_DRAG_OFFSET -= pixelTravel));
@@ -296,7 +310,17 @@ export class Laufsteg implements Partial<Callbacks> {
     }
 
     if (this.STATE == 'DECLERATING') {
-      if (Math.abs(currentSpeed) > 1 + Math.abs(this.OPTIONS.animationSpeed)) {
+      if (
+        Math.abs(currentSpeed) > 1 + Math.abs(this.OPTIONS.animationSpeed) &&
+        releasedFasterThanAnimation
+      ) {
+        window.requestAnimationFrame((time) => {
+          this.beginDeceleration(time);
+        });
+      } else if (
+        Math.abs(currentSpeed) + 1 < Math.abs(this.OPTIONS.animationSpeed) &&
+        !releasedFasterThanAnimation
+      ) {
         window.requestAnimationFrame((time) => {
           this.beginDeceleration(time);
         });
@@ -314,12 +338,16 @@ export class Laufsteg implements Partial<Callbacks> {
     // TODO: Handle state when is decelerating
     this.STATE = 'CSS_ANIMATING';
 
-    this.CSS_ANIMATION_DESTINATION =
-      this.SAVED_DRAG_OFFSET - this.OPTIONS.animationSpeed;
-    this.addCSSTransition();
-    this.setOffsetToDOM(this.CSS_ANIMATION_DESTINATION);
+    const animationDuration =
+      this.CELL_SIZE.width / Math.abs(this.OPTIONS.animationSpeed);
 
+    const directionalFactor = this.OPTIONS.animationSpeed > 0 ? 1 : -1;
+
+    this.CSS_ANIMATION_DESTINATION =
+      this.SAVED_DRAG_OFFSET - this.CELL_SIZE.width * directionalFactor;
+    this.addCSSTransition(animationDuration);
     this.rearrangeCellsIfNeeded();
+    this.setOffsetToDOM(this.CSS_ANIMATION_DESTINATION);
   }
 
   private stopCSSAnimation(offset?: number) {
@@ -336,11 +364,13 @@ export class Laufsteg implements Partial<Callbacks> {
     }
   }
 
-  private addCSSTransition() {
+  private addCSSTransition(duration?: number) {
     if (!this.DOM_NODES.trolley) {
       return;
     }
-    this.DOM_NODES.trolley.style.transition = `transform 1s linear`;
+    this.DOM_NODES.trolley.style.transition = `transform ${
+      duration ?? 1
+    }s linear`;
   }
 
   private removeCSSTransition() {
@@ -405,7 +435,7 @@ export class Laufsteg implements Partial<Callbacks> {
   private setAnimationDirection(dragSpeed: number) {
     if (dragSpeed < 0) {
       this.OPTIONS.animationSpeed = Math.abs(this.OPTIONS.animationSpeed) * -1;
-    } else {
+    } else if (dragSpeed > 0) {
       this.OPTIONS.animationSpeed = Math.abs(this.OPTIONS.animationSpeed);
     }
   }
