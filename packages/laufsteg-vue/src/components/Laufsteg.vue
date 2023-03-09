@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import type { LaufstegOptions } from 'laufsteg';
 import { createLaufsteg } from 'laufsteg';
-import { onUpdated, ref, watchEffect } from 'vue';
+import { defineExpose, ref, watchEffect } from 'vue';
 
 const laufsteg = ref<ReturnType<typeof createLaufsteg>>();
 
@@ -33,7 +33,22 @@ const props = defineProps<{
 
 const trolley = ref<HTMLDivElement>();
 
-onUpdated(() => {
+const update = () => {
   laufsteg.value?.rebuild();
-});
+};
+
+defineExpose({ update });
+
+// mounted() {
+//   const observer = new MutationObserver(this.validate);
+//   observer.observe(this.$el, {
+//     childList: true,
+//     subtree: true
+//   });
+//   this.observer = observer;
+// },
+// // For Vue.js v2 use beforeDestroy
+// beforeUnmount() {
+//   this.observer.disconnect();
+// }
 </script>

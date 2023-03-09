@@ -94,9 +94,6 @@ export class Laufsteg implements Partial<Callbacks> {
     // Sizes the trolley based on the first cell
     const firstCell = this.DOM_NODES.cells[0];
     this.CELL_SIZE = getCellPixelSize(firstCell);
-    if (this.CELL_SIZE.width === 0) {
-      return;
-    }
 
     this.applyItemSize();
 
