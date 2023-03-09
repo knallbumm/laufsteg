@@ -1,5 +1,11 @@
 # laufsteg
 
+## 0.0.9
+
+### Patch Changes
+
+- 2dd2adf: Fixing bugs and adding option to speed up animation
+
 ## 0.0.8
 
 ### Patch Changes
