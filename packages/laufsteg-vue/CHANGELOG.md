@@ -1,5 +1,11 @@
 # laufsteg-vue
 
+## 0.0.10
+
+### Patch Changes
+
+- 69b91c8: Switching back to defineExpose
+
 ## 0.0.9
 
 ### Patch Changes
