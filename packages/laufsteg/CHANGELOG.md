@@ -1,5 +1,11 @@
 # laufsteg
 
+## 0.0.8
+
+### Patch Changes
+
+- df7cb91: Improved stability
+
 ## 0.0.7
 
 ### Patch Changes
