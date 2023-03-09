@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import type { LaufstegOptions } from 'laufsteg';
 import { createLaufsteg } from 'laufsteg';
-import { onMounted, onUpdated, ref, watchEffect } from 'vue';
+import { onUpdated, ref, watchEffect } from 'vue';
 
 const laufsteg = ref<ReturnType<typeof createLaufsteg>>();
 
@@ -33,22 +33,7 @@ const props = defineProps<{
 
 const trolley = ref<HTMLDivElement>();
 
-const observer = ref();
-console.log('BLAAA');
-onMounted(() => {
-  console.log('onMounted');
-  if (trolley.value) {
-    observer.value = new MutationObserver(() => {
-      laufsteg.value?.rebuild();
-    });
-    observer.value.observe(trolley.value, {
-      childList: true,
-      subtree: true,
-    });
-  }
-});
 onUpdated(() => {
-  console.log('onUpdated');
   laufsteg.value?.rebuild();
 });
 </script>
