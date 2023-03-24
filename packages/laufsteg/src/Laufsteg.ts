@@ -441,10 +441,13 @@ export class Laufsteg implements Partial<Callbacks> {
   }
 
   private resize() {
+    const oldSize = this.CONTAINER_SIZE;
     this.CONTAINER_SIZE = getContainerSize(this.DOM_NODES.container);
 
     //TODO: Real resizing
-    this.rebuild();
+    if (oldSize.width != this.CONTAINER_SIZE.width) {
+      this.rebuild();
+    }
   }
 
   private resetDrag() {
