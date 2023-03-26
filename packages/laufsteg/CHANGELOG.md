@@ -1,5 +1,11 @@
 # laufsteg
 
+## 0.0.11
+
+### Patch Changes
+
+- 35c3c97: removing weird stutters in chrome mobile
+
 ## 0.0.10
 
 ### Patch Changes
