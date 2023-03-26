@@ -16,4 +16,5 @@ export interface LaufstegInternal {
   lastMoveTimestamp: number;
   decelerationStart: number | undefined;
   lastDelecerationFrameTimestamp: number | undefined;
+  runningInterval?: number;
 }

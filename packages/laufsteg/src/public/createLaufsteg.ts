@@ -1,6 +1,7 @@
 import { addEventListeners } from '../functions/addEventListeners';
 import { initLaufsteg } from '../functions/init/initLaufsteg';
 import { rebuild } from '../functions/rebuild';
+import { startSwitchInterval } from '../functions/startSwitchInterval';
 import type { LaufstegOptions } from '../types';
 import type { Laufsteg } from '../types/Laufsteg';
 import type { LaufstegWithFunctions } from '../types/LaufstegWithFunctions';
@@ -43,6 +44,8 @@ export function createLaufsteg(
   applyCursors(container, parsedOptions.cursor, isDragging(laufsteg));
 
   start(laufsteg);
+
+  startSwitchInterval(laufsteg)();
 
   addResizeObserver(firstCell, () => {
     laufsteg._internal.cellSize = getCellPixelSize(firstCell);
