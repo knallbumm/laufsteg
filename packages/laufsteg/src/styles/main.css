@@ -14,6 +14,8 @@
 
 .laufsteg-trolley {
   position: relative;
+  will-change: transform;
+  transform: translate3d(var(--trolley-offset), 0, 0);
 }
 
 .laufsteg-cell {

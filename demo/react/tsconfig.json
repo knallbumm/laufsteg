@@ -4,6 +4,6 @@
     "jsx": "react-jsx",
     "esModuleInterop": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "../../demo/react/vite-env.d.ts"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["**/*.test.ts"]
 }

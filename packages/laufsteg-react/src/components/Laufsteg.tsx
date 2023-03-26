@@ -56,11 +56,11 @@ export function Laufsteg({
   useEffect(() => {
     if (container.current && !laufsteg.current) {
       laufsteg.current = createLaufsteg(container.current, props);
-      laufsteg.current.onDragStart = onDragStart && handleDragStart;
-      laufsteg.current.onDragEnd = onDragEnd && handleDragEnd;
-      laufsteg.current.onDecelerationStart =
+      laufsteg.current.callbacks.onDragStart = onDragStart && handleDragStart;
+      laufsteg.current.callbacks.onDragEnd = onDragEnd && handleDragEnd;
+      laufsteg.current.callbacks.onDecelerationStart =
         onDecelerationStart && handleDecelerationStart;
-      laufsteg.current.onDecelerationEnd && handleDecelerationEnd;
+      laufsteg.current.callbacks.onDecelerationEnd && handleDecelerationEnd;
     }
   }, [
     container.current,

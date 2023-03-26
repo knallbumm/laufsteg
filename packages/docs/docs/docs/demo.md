@@ -10,7 +10,7 @@ Laufsteg can be used in many ways and for many things. To show you some of them,
 import {Laufsteg, LaufstegCell} from 'laufsteg-vue'
 </script>
 
-<Laufsteg gap="1rem" :animationSpeed="0"><LaufstegCell>test</LaufstegCell> </Laufsteg>
+<Laufsteg gap="1rem" ><LaufstegCell>test</LaufstegCell> </Laufsteg>
 
 ::: warning
 This page is not done yet. We will add samples later.

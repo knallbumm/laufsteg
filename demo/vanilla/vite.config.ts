@@ -5,7 +5,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // skip /dist resolution for hmr
-      laufsteg: resolve(__dirname, '../packages/laufsteg/index.ts'),
+      laufsteg: resolve(__dirname, '../../packages/laufsteg/index.ts'),
     },
   },
 });

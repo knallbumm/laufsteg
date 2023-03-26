@@ -38,17 +38,4 @@ const update = () => {
 };
 
 defineExpose({ update });
-
-// mounted() {
-//   const observer = new MutationObserver(this.validate);
-//   observer.observe(this.$el, {
-//     childList: true,
-//     subtree: true
-//   });
-//   this.observer = observer;
-// },
-// // For Vue.js v2 use beforeDestroy
-// beforeUnmount() {
-//   this.observer.disconnect();
-// }
 </script>

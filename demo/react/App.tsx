@@ -1,4 +1,6 @@
-import { Laufsteg } from '../src/components';
+import { Laufsteg } from 'laufsteg-react';
+import React from 'react';
+
 import { ReviewLaufsteg } from './compoents/ReviewLaufsteg';
 
 function App() {
