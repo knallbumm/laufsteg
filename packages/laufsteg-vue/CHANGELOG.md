@@ -1,5 +1,13 @@
 # laufsteg-vue
 
+## 0.0.12
+
+### Patch Changes
+
+- eb996d2: Migrating to functional approach instead of classes
+- Updated dependencies [eb996d2]
+  - laufsteg@0.0.10
+
 ## 0.0.11
 
 ### Patch Changes
