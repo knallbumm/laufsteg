@@ -11,7 +11,8 @@ export const startSwitchInterval = (laufsteg: InternalLaufsteg) => () => {
     laufsteg._internal.cellSize.width /
     Math.abs(laufsteg.options.animationSpeed);
 
-  laufsteg._internal.runningInterval = setInterval(() => {
+  // uses window to fix type error with react
+  laufsteg._internal.runningInterval = window.setInterval(() => {
     captureCurrentOffset(laufsteg)();
     rearrangeCellsIfNeeded(laufsteg)();
   }, animationDuration * 1000);
