@@ -1,56 +1,52 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 import { calculateOverdoses } from '../utils/calculateOverdoses';
 import { findMaxPositions } from '../utils/findMaxPositons';
 import { getOffset } from '../utils/getOffset';
 import { setPositionsToCells } from '../utils/setPositionsToCells';
 
-export const rearrangeCellsIfNeeded = (wrapper: LaufstegWrapper) => () => {
+export const rearrangeCellsIfNeeded = (laufsteg: InternalLaufsteg) => () => {
   const { min, max, indexOfMin, indexOfMax } = findMaxPositions(
-    wrapper.internal.cellPositions
+    laufsteg._internal.cellPositions
   );
 
   const { leftOverdose, rightOverdose } = calculateOverdoses({
-    offset: getOffset(wrapper),
+    offset: getOffset(laufsteg),
     min,
-    cellSize: wrapper.internal.cellSize,
-    containerSize: wrapper.internal.containerSize,
-    numberOfCells: wrapper.internal.cellPositions.length,
+    cellSize: laufsteg._internal.cellSize,
+    containerSize: laufsteg._internal.containerSize,
+    numberOfCells: laufsteg._internal.cellPositions.length,
   });
-
-  console.log(leftOverdose, rightOverdose, 'OVERDOSE');
 
   if (rightOverdose > leftOverdose) {
     const difference = rightOverdose - leftOverdose;
     const correctedDifference = Math.abs(
       rightOverdose -
-        wrapper.internal.cellSize.width -
-        (leftOverdose + wrapper.internal.cellSize.width)
+        laufsteg._internal.cellSize.width -
+        (leftOverdose + laufsteg._internal.cellSize.width)
     );
 
     if (correctedDifference < difference) {
-      wrapper.internal.cellPositions[indexOfMax] = min - 100;
+      laufsteg._internal.cellPositions[indexOfMax] = min - 100;
       setPositionsToCells(
-        wrapper.internal.domNodes.cells,
-        wrapper.internal.cellPositions
+        laufsteg._internal.domNodes.cells,
+        laufsteg._internal.cellPositions
       );
     }
-    console.log(correctedDifference, difference, 1);
   } else if (leftOverdose > rightOverdose) {
     const difference = leftOverdose - rightOverdose;
     const correctedDifference = Math.abs(
       leftOverdose -
-        wrapper.internal.cellSize.width -
-        (rightOverdose + wrapper.internal.cellSize.width)
+        laufsteg._internal.cellSize.width -
+        (rightOverdose + laufsteg._internal.cellSize.width)
     );
 
     if (correctedDifference < difference) {
-      wrapper.internal.cellPositions[indexOfMin] = max + 100;
+      laufsteg._internal.cellPositions[indexOfMin] = max + 100;
       setPositionsToCells(
-        wrapper.internal.domNodes.cells,
-        wrapper.internal.cellPositions
+        laufsteg._internal.domNodes.cells,
+        laufsteg._internal.cellPositions
       );
-      wrapper.internal.domNodes.cells, wrapper.internal.cellPositions;
+      laufsteg._internal.domNodes.cells, laufsteg._internal.cellPositions;
     }
-    // console.log(correctedDifference, difference, 2);
   }
 };

@@ -1,11 +1,11 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 
 export const addCSSTransition =
-  (wrapper: LaufstegWrapper) => (duration?: number) => {
-    if (!wrapper.internal.domNodes.trolley) {
+  (laufsteg: InternalLaufsteg) => (duration?: number) => {
+    if (!laufsteg._internal.domNodes.trolley) {
       return;
     }
-    wrapper.internal.domNodes.trolley.style.transition = `transform ${
+    laufsteg._internal.domNodes.trolley.style.transition = `transform ${
       duration ?? 1
     }s linear`;
   };

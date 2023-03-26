@@ -1,6 +1,6 @@
 import { stopCSSAnimation } from '../functions/stopCSSAnimation';
-import { wrapper } from './createLaufsteg';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 
-export function stop() {
-  stopCSSAnimation(wrapper)();
+export function stop(laufsteg: InternalLaufsteg) {
+  stopCSSAnimation(laufsteg)();
 }

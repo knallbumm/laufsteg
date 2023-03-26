@@ -1,8 +1,11 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 import { setTrolleySize } from '../utils/setTrolleySize';
 import { cloneCellsWhenNeeded } from './cloneCellsWhenNeeded';
 
-export const applyItemSize = (wrapper: LaufstegWrapper) => () => {
-  setTrolleySize(wrapper.internal.domNodes.trolley, wrapper.internal.cellSize);
-  cloneCellsWhenNeeded(wrapper)();
+export const applyItemSize = (laufsteg: InternalLaufsteg) => () => {
+  setTrolleySize(
+    laufsteg._internal.domNodes.trolley,
+    laufsteg._internal.cellSize
+  );
+  cloneCellsWhenNeeded(laufsteg)();
 };

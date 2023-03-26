@@ -1,23 +1,23 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 import { calculateNumberOfNeededCells } from '../utils/calculateNumberOfNeededCells';
 import { fillUpCells } from '../utils/fillUpCells';
 import { prepareCellPositions } from '../utils/prepareCellPositions';
 
-export const cloneCellsWhenNeeded = (wrapper: LaufstegWrapper) => () => {
+export const cloneCellsWhenNeeded = (laufsteg: InternalLaufsteg) => () => {
   const numberOfNeededCells =
     calculateNumberOfNeededCells(
-      wrapper.internal.cellSize,
-      wrapper.internal.containerSize
+      laufsteg._internal.cellSize,
+      laufsteg._internal.containerSize
     ) +
-    wrapper.laufsteg.options.overflowItems * 2;
+    laufsteg.options.overflowItems * 2;
 
   fillUpCells(
-    wrapper.internal.domNodes.cells,
-    wrapper.internal.domNodes.trolley,
+    laufsteg._internal.domNodes.cells,
+    laufsteg._internal.domNodes.trolley,
     numberOfNeededCells
   );
 
-  wrapper.internal.cellPositions = prepareCellPositions(
-    wrapper.internal.domNodes.cells.length
+  laufsteg._internal.cellPositions = prepareCellPositions(
+    laufsteg._internal.domNodes.cells.length
   );
 };

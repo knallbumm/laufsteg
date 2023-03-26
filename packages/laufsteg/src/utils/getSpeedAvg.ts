@@ -1,8 +1,8 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 
-export const getSpeedAvg = (wrapper: LaufstegWrapper) => () => {
+export const getSpeedAvg = (laufsteg: InternalLaufsteg) => () => {
   return (
-    wrapper.internal.lastSpeeds.reduce((p, c) => p + c, 0) /
-    wrapper.internal.lastSpeeds.length
+    laufsteg._internal.lastSpeeds.reduce((p, c) => p + c, 0) /
+    laufsteg._internal.lastSpeeds.length
   );
 };

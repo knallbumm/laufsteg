@@ -1,14 +1,15 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 
-export const captureCurrentOffset = (wrapper: LaufstegWrapper) => () => {
-  if (!wrapper.internal.domNodes.trolley) {
+export const captureCurrentOffset = (laufsteg: InternalLaufsteg) => () => {
+  if (!laufsteg._internal.domNodes.trolley) {
     throw new Error(
       'Cannot capture current offset because there is no trolley'
     );
   }
 
   const containerRect =
-    wrapper.internal.domNodes.container.getBoundingClientRect();
-  const clientRect = wrapper.internal.domNodes.trolley.getBoundingClientRect();
-  wrapper.internal.savedDragOffset = clientRect.x - containerRect.x;
+    laufsteg._internal.domNodes.container.getBoundingClientRect();
+  const clientRect =
+    laufsteg._internal.domNodes.trolley.getBoundingClientRect();
+  laufsteg._internal.savedDragOffset = clientRect.x - containerRect.x;
 };

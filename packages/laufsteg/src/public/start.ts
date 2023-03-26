@@ -1,6 +1,6 @@
 import { startCSSAnimation } from '../functions/startCSSAnimation';
-import { wrapper } from './createLaufsteg';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 
-export function start() {
-  startCSSAnimation(wrapper)();
+export function start(laufsteg: InternalLaufsteg) {
+  startCSSAnimation(laufsteg)();
 }

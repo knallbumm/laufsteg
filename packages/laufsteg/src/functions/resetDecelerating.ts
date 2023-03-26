@@ -1,7 +1,7 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 
-export const resetDecelerating = (wrapper: LaufstegWrapper) => () => {
-  wrapper.internal.dragReleaseSpeed = 0;
-  wrapper.internal.decelerationStart = undefined;
-  wrapper.internal.lastDelecerationFrameTimestamp = undefined;
+export const resetDecelerating = (laufsteg: InternalLaufsteg) => () => {
+  laufsteg._internal.dragReleaseSpeed = 0;
+  laufsteg._internal.decelerationStart = undefined;
+  laufsteg._internal.lastDelecerationFrameTimestamp = undefined;
 };

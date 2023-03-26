@@ -1,4 +1,4 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 import { extractCells } from '../utils/extractCells';
 import { getCellPixelSize } from '../utils/getCellPixelSize';
 import { removeAllClones } from '../utils/removeAllClones';
@@ -7,27 +7,27 @@ import { applyItemSize } from './applyItemSize';
 import { startCSSAnimation } from './startCSSAnimation';
 import { stopCSSAnimation } from './stopCSSAnimation';
 
-export const rebuild = (wrapper: LaufstegWrapper) => () => {
-  stopCSSAnimation(wrapper)(0);
+export const rebuild = (laufsteg: InternalLaufsteg) => () => {
+  stopCSSAnimation(laufsteg)(0);
   removeAllClones(
-    wrapper.internal.domNodes.cells,
-    wrapper.internal.domNodes.trolley
+    laufsteg._internal.domNodes.cells,
+    laufsteg._internal.domNodes.trolley
   );
-  wrapper.internal.domNodes.cells = extractCells(
-    wrapper.internal.domNodes.trolley
+  laufsteg._internal.domNodes.cells = extractCells(
+    laufsteg._internal.domNodes.trolley
   );
 
-  const firstCell = wrapper.internal.domNodes.cells[0];
-  wrapper.internal.cellSize = getCellPixelSize(firstCell);
-  if (wrapper.internal.cellSize.width === 0) {
+  const firstCell = laufsteg._internal.domNodes.cells[0];
+  laufsteg._internal.cellSize = getCellPixelSize(firstCell);
+  if (laufsteg._internal.cellSize.width === 0) {
     return;
   }
-  applyItemSize(wrapper)();
+  applyItemSize(laufsteg)();
 
   setPositionsToCells(
-    wrapper.internal.domNodes.cells,
-    wrapper.internal.cellPositions
+    laufsteg._internal.domNodes.cells,
+    laufsteg._internal.cellPositions
   );
 
-  startCSSAnimation(wrapper)();
+  startCSSAnimation(laufsteg)();
 };

@@ -1,8 +1,8 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 
-export function isDragging(wrapper: LaufstegWrapper) {
+export function isDragging(laufsteg: InternalLaufsteg) {
   return (
-    wrapper.internal.currentDragStartX != undefined &&
-    wrapper.internal.state == 'DRAGGING'
+    laufsteg._internal.currentDragStartX != undefined &&
+    laufsteg._internal.state == 'DRAGGING'
   );
 }

@@ -1,34 +1,35 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 import { draggingEnded } from './draggingEnded';
 import { draggingMoved } from './draggingMoved';
 import { draggingStarted } from './draggingStarted';
 import { resize } from './resize';
 import { setNewAnimationPosition } from './setNewAnimationPosition';
 
-export function addEventListeners(wrapper: LaufstegWrapper) {
-  wrapper.internal.domNodes.container.addEventListener(
+export function addEventListeners(laufsteg: InternalLaufsteg) {
+  laufsteg._internal.domNodes.container.addEventListener(
     'mousedown',
-    draggingStarted(wrapper)
+    draggingStarted(laufsteg)
   );
-  wrapper.internal.domNodes.container.addEventListener(
+  laufsteg._internal.domNodes.container.addEventListener(
     'touchstart',
-    draggingStarted(wrapper)
+    draggingStarted(laufsteg)
   );
 
-  window.addEventListener('mousemove', draggingMoved(wrapper));
-  window.addEventListener('touchmove', draggingMoved(wrapper));
+  window.addEventListener('mousemove', draggingMoved(laufsteg));
+  window.addEventListener('touchmove', draggingMoved(laufsteg));
 
-  window.addEventListener('mouseup', draggingEnded(wrapper));
-  window.addEventListener('touchend', draggingEnded(wrapper));
-  wrapper.internal.domNodes.trolley.addEventListener(
+  window.addEventListener('mouseup', draggingEnded(laufsteg));
+  window.addEventListener('touchend', draggingEnded(laufsteg));
+  laufsteg._internal.domNodes.trolley.addEventListener(
     'touchcancel',
-    draggingEnded(wrapper)
+    draggingEnded(laufsteg)
   );
 
-  wrapper.internal.domNodes.trolley.addEventListener('transitionend', () => {
-    wrapper.internal.savedDragOffset = wrapper.internal.cssAnimationDestination;
-    setNewAnimationPosition(wrapper)();
+  laufsteg._internal.domNodes.trolley.addEventListener('transitionend', () => {
+    laufsteg._internal.savedDragOffset =
+      laufsteg._internal.cssAnimationDestination;
+    setNewAnimationPosition(laufsteg)();
   });
 
-  window.addEventListener('resize', resize(wrapper));
+  window.addEventListener('resize', resize(laufsteg));
 }

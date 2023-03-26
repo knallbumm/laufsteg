@@ -1,8 +1,8 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 
-export const removeCSSTransition = (wrapper: LaufstegWrapper) => () => {
-  if (!wrapper.internal.domNodes.trolley) {
+export const removeCSSTransition = (laufsteg: InternalLaufsteg) => () => {
+  if (!laufsteg._internal.domNodes.trolley) {
     return;
   }
-  wrapper.internal.domNodes.trolley.style.transition = `none`;
+  laufsteg._internal.domNodes.trolley.style.transition = `none`;
 };

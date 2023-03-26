@@ -1,7 +1,8 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 
-export function getOffset(wrapper: LaufstegWrapper) {
+export function getOffset(laufsteg: InternalLaufsteg) {
   return Math.round(
-    wrapper.internal.savedDragOffset + (wrapper.internal.currentDragTravel ?? 0)
+    laufsteg._internal.savedDragOffset +
+      (laufsteg._internal.currentDragTravel ?? 0)
   );
 }

@@ -1,4 +1,4 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 import { applyCursors } from '../utils/applyCursors';
 import { getOffset } from '../utils/getOffset';
 import { getSpeedAvg } from '../utils/getSpeedAvg';
@@ -8,33 +8,34 @@ import { resetDrag } from './resetDrag';
 import { setAnimationDirection } from './setAnimationDirection';
 import { setOffsetToDOM } from './setOffsetToDOM';
 
-export const draggingEnded = (wrapper: LaufstegWrapper) => () => {
-  if (!isDragging(wrapper)) {
+export const draggingEnded = (laufsteg: InternalLaufsteg) => () => {
+  if (!isDragging(laufsteg)) {
     return;
   }
 
-  wrapper.internal.savedDragOffset += wrapper.internal.currentDragTravel ?? 0;
+  laufsteg._internal.savedDragOffset +=
+    laufsteg._internal.currentDragTravel ?? 0;
 
-  setOffsetToDOM(wrapper)(wrapper.internal.savedDragOffset);
+  setOffsetToDOM(laufsteg)(laufsteg._internal.savedDragOffset);
 
-  const dragReleaseSpeed = getSpeedAvg(wrapper)();
-  setAnimationDirection(wrapper)(dragReleaseSpeed);
-  wrapper.internal.dragReleaseSpeed = dragReleaseSpeed;
+  const dragReleaseSpeed = getSpeedAvg(laufsteg)();
+  setAnimationDirection(laufsteg)(dragReleaseSpeed);
+  laufsteg._internal.dragReleaseSpeed = dragReleaseSpeed;
 
-  wrapper.laufsteg.callbacks.onDragEnd?.(getOffset(wrapper));
+  laufsteg.callbacks.onDragEnd?.(getOffset(laufsteg));
 
-  wrapper.internal.state = 'DECLERATING';
-  wrapper.laufsteg.callbacks.onDecelerationStart?.(
-    getOffset(wrapper),
+  laufsteg._internal.state = 'DECLERATING';
+  laufsteg.callbacks.onDecelerationStart?.(
+    getOffset(laufsteg),
     dragReleaseSpeed
   );
-  beginDeceleration(wrapper)(performance.now());
+  beginDeceleration(laufsteg)(performance.now());
 
-  resetDrag(wrapper)();
+  resetDrag(laufsteg)();
 
   applyCursors(
-    wrapper.internal.domNodes.container,
-    wrapper.laufsteg.options.cursor,
-    isDragging(wrapper)
+    laufsteg._internal.domNodes.container,
+    laufsteg.options.cursor,
+    isDragging(laufsteg)
   );
 };

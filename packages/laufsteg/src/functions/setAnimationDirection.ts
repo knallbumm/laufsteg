@@ -1,13 +1,13 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 
 export const setAnimationDirection =
-  (wrapper: LaufstegWrapper) => (dragSpeed: number) => {
+  (laufsteg: InternalLaufsteg) => (dragSpeed: number) => {
     if (dragSpeed < 0) {
-      wrapper.laufsteg.options.animationSpeed =
-        Math.abs(wrapper.laufsteg.options.animationSpeed) * -1;
+      laufsteg.options.animationSpeed =
+        Math.abs(laufsteg.options.animationSpeed) * -1;
     } else if (dragSpeed > 0) {
-      wrapper.laufsteg.options.animationSpeed = Math.abs(
-        wrapper.laufsteg.options.animationSpeed
+      laufsteg.options.animationSpeed = Math.abs(
+        laufsteg.options.animationSpeed
       );
     }
   };

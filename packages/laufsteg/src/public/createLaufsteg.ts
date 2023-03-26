@@ -1,9 +1,9 @@
 import { addEventListeners } from '../functions/addEventListeners';
-import { initInternal } from '../functions/init/initInternal';
 import { initLaufsteg } from '../functions/init/initLaufsteg';
+import { rebuild } from '../functions/rebuild';
 import type { LaufstegOptions } from '../types';
 import type { Laufsteg } from '../types/Laufsteg';
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { LaufstegWithFunctions } from '../types/LaufstegWithFunctions';
 import { addResizeObserver } from '../utils/addResizeObserver';
 import { applyCursors } from '../utils/applyCursors';
 import { applyGap } from '../utils/applyGap';
@@ -15,47 +15,41 @@ import { isDragging } from '../utils/isDragging';
 import { setPositionsToCells } from '../utils/setPositionsToCells';
 import { start } from './start';
 
-export let wrapper: LaufstegWrapper;
 export function createLaufsteg(
   container: HTMLDivElement,
   options: Partial<LaufstegOptions>
-): Laufsteg {
+): LaufstegWithFunctions {
   const parsedOptions = getOptionsWithDefaults(options);
 
-  wrapper = {
-    laufsteg: initLaufsteg(parsedOptions),
-    internal: initInternal(container),
-  };
+  const laufsteg = initLaufsteg(parsedOptions, container);
 
   applyGap(container, parsedOptions.gap);
 
-  wrapper.internal.containerSize = getContainerSize(container);
+  laufsteg._internal.containerSize = getContainerSize(container);
 
   // Sizes the trolley based on the first cell
-  const firstCell = wrapper.internal.domNodes.cells[0];
-  wrapper.internal.cellSize = getCellPixelSize(firstCell);
+  const firstCell = laufsteg._internal.domNodes.cells[0];
+  laufsteg._internal.cellSize = getCellPixelSize(firstCell);
 
-  applyItemSize(wrapper)();
+  applyItemSize(laufsteg)();
 
   setPositionsToCells(
-    wrapper.internal.domNodes.cells,
-    wrapper.internal.cellPositions
+    laufsteg._internal.domNodes.cells,
+    laufsteg._internal.cellPositions
   );
 
-  addEventListeners(wrapper);
+  addEventListeners(laufsteg);
 
-  applyCursors(container, parsedOptions.cursor, isDragging(wrapper));
+  applyCursors(container, parsedOptions.cursor, isDragging(laufsteg));
 
-  start();
+  start(laufsteg);
 
   addResizeObserver(firstCell, () => {
-    wrapper.internal.cellSize = getCellPixelSize(firstCell);
-    applyItemSize(wrapper)();
+    laufsteg._internal.cellSize = getCellPixelSize(firstCell);
+    applyItemSize(laufsteg)();
   });
 
-  if (!wrapper?.laufsteg) {
-    throw new Error('Laufsteg could not be created');
-  }
+  (laufsteg as Laufsteg as LaufstegWithFunctions).rebuild = rebuild(laufsteg);
 
-  return wrapper?.laufsteg;
+  return laufsteg as Laufsteg as LaufstegWithFunctions;
 }

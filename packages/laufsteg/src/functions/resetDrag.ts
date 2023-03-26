@@ -1,7 +1,7 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 
-export const resetDrag = (wrapper: LaufstegWrapper) => () => {
-  wrapper.internal.currentDragStartX = undefined;
-  wrapper.internal.currentDragTravel = undefined;
-  wrapper.internal.lastSpeeds = [];
+export const resetDrag = (laufsteg: InternalLaufsteg) => () => {
+  laufsteg._internal.currentDragStartX = undefined;
+  laufsteg._internal.currentDragTravel = undefined;
+  laufsteg._internal.lastSpeeds = [];
 };

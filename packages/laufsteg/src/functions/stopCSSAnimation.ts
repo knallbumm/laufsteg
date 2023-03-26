@@ -1,19 +1,19 @@
-import type { LaufstegWrapper } from '../types/LaufstegWrapper';
+import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 import { captureCurrentOffset } from './captureCurrentOffset';
 import { removeCSSTransition } from './removeCSSTransition';
 import { setOffsetToDOM } from './setOffsetToDOM';
 
 export const stopCSSAnimation =
-  (wrapper: LaufstegWrapper) => (offset?: number) => {
-    if (wrapper.internal.state == 'CSS_ANIMATING') {
+  (laufsteg: InternalLaufsteg) => (offset?: number) => {
+    if (laufsteg._internal.state == 'CSS_ANIMATING') {
       if (offset === undefined) {
-        captureCurrentOffset(wrapper)();
+        captureCurrentOffset(laufsteg)();
       } else {
-        wrapper.internal.savedDragOffset = offset;
+        laufsteg._internal.savedDragOffset = offset;
       }
 
-      setOffsetToDOM(wrapper)(wrapper.internal.savedDragOffset);
-      removeCSSTransition(wrapper)();
-      wrapper.internal.cssAnimationDestination = 0;
+      setOffsetToDOM(laufsteg)(laufsteg._internal.savedDragOffset);
+      removeCSSTransition(laufsteg)();
+      laufsteg._internal.cssAnimationDestination = 0;
     }
   };
