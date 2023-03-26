@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "pnpm -C ./demo run dev ",
-    "dev:react": "turbo dev --filter=laufsteg-react",
-    "dev:vue": "turbo dev --filter=laufsteg-vue",
+    "dev": "pnpm -C ./demo/vanilla run dev ",
+    "dev:react": "pnpm -C ./demo/react run dev",
+    "dev:vue": "pnpm -C ./demo/vue run dev ",
     "dev:clean": "(cd ./demo && pnpm run dev)",
     "docs": "turbo dev --filter=@laufsteg/docs",
     "build": "turbo build --filter=!@laufsteg/docs",
