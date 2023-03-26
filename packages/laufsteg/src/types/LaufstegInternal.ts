@@ -1,5 +1,5 @@
-import type { Size } from '../../types/Size';
 import type { DomNodes } from './DomNodes';
+import type { Size } from './Size';
 
 export interface LaufstegInternal {
   domNodes: DomNodes;
