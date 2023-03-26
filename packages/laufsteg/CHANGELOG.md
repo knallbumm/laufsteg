@@ -1,5 +1,11 @@
 # laufsteg
 
+## 0.0.10
+
+### Patch Changes
+
+- eb996d2: Migrating to functional approach instead of classes
+
 ## 0.0.9
 
 ### Patch Changes
