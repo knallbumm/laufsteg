@@ -4,7 +4,7 @@ export function setPositionsToCells(
 ): void {
   for (const [index, cell] of cells.entries()) {
     const position = positions?.[index];
-    if (position == undefined || position == null) {
+    if (position == undefined) {
       throw new Error('No cell position known for this cell');
     }
     cell.style.transform = `translateX(${position}%)`;

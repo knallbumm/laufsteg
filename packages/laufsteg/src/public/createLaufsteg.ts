@@ -1,7 +1,9 @@
 import { addEventListeners } from '../functions/addEventListeners';
 import { initLaufsteg } from '../functions/init/initLaufsteg';
 import { rebuild } from '../functions/rebuild';
+import { start } from '../functions/start';
 import { startSwitchInterval } from '../functions/startSwitchInterval';
+import { stop } from '../functions/stop';
 import type { LaufstegOptions } from '../types';
 import type { Laufsteg } from '../types/Laufsteg';
 import type { LaufstegWithFunctions } from '../types/LaufstegWithFunctions';
@@ -14,7 +16,6 @@ import { getContainerSize } from '../utils/getContainerSize';
 import { getOptionsWithDefaults } from '../utils/getOptionsWithDefaults';
 import { isDragging } from '../utils/isDragging';
 import { setPositionsToCells } from '../utils/setPositionsToCells';
-import { start } from './start';
 
 export function createLaufsteg(
   container: HTMLDivElement,
@@ -43,7 +44,7 @@ export function createLaufsteg(
 
   applyCursors(container, parsedOptions.cursor, isDragging(laufsteg));
 
-  start(laufsteg);
+  start(laufsteg)();
 
   startSwitchInterval(laufsteg)();
 
@@ -53,6 +54,8 @@ export function createLaufsteg(
   });
 
   (laufsteg as Laufsteg as LaufstegWithFunctions).rebuild = rebuild(laufsteg);
+  (laufsteg as Laufsteg as LaufstegWithFunctions).start = start(laufsteg);
+  (laufsteg as Laufsteg as LaufstegWithFunctions).stop = stop(laufsteg);
 
   return laufsteg as Laufsteg as LaufstegWithFunctions;
 }
