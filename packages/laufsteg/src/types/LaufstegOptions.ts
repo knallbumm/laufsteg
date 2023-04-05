@@ -14,6 +14,9 @@ export interface LaufstegOptions {
   /** Descibes the friction of the elements, after the user stopped dragging them. When given 1 it never stops. The higher the value, the faster it stops. */
   friction: number;
 
+  /** Distance in px the scroll has to move horizontally until the vertical scroll lock activates*/
+  scrollLockDistance: number;
+
   /** (Minimum) number of items on each side to make sure there is no blank space — even with fast dragging.  */
   overflowItems: number;
 
