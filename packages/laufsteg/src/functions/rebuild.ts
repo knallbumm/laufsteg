@@ -1,9 +1,9 @@
 import type { InternalLaufsteg } from '../types/InternalLaufsteg';
+import { applyItemSize } from '../utils/applyItemSize';
 import { extractCells } from '../utils/extractCells';
 import { getCellPixelSize } from '../utils/getCellPixelSize';
 import { removeAllClones } from '../utils/removeAllClones';
 import { setPositionsToCells } from '../utils/setPositionsToCells';
-import { applyItemSize } from './applyItemSize';
 import { startCSSAnimation } from './startCSSAnimation';
 import { stopCSSAnimation } from './stopCSSAnimation';
 

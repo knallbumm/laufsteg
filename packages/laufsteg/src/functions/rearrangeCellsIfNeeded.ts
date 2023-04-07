@@ -4,6 +4,10 @@ import { findMaxPositions } from '../utils/findMaxPositons';
 import { getOffset } from '../utils/getOffset';
 import { setPositionsToCells } from '../utils/setPositionsToCells';
 
+/**
+ * Returns true if cells were switched. False if there was nothing to switch
+ * @param laufsteg
+ */
 export const rearrangeCellsIfNeeded = (laufsteg: InternalLaufsteg) => () => {
   const { min, max, indexOfMin, indexOfMax } = findMaxPositions(
     laufsteg._internal.cellPositions
@@ -31,7 +35,9 @@ export const rearrangeCellsIfNeeded = (laufsteg: InternalLaufsteg) => () => {
         laufsteg._internal.domNodes.cells,
         laufsteg._internal.cellPositions
       );
+      return true;
     }
+    return false;
   } else if (leftOverdose > rightOverdose) {
     const difference = leftOverdose - rightOverdose;
     const correctedDifference = Math.abs(
@@ -46,7 +52,10 @@ export const rearrangeCellsIfNeeded = (laufsteg: InternalLaufsteg) => () => {
         laufsteg._internal.domNodes.cells,
         laufsteg._internal.cellPositions
       );
-      laufsteg._internal.domNodes.cells, laufsteg._internal.cellPositions;
+
+      return true;
     }
+    return false;
   }
+  return false;
 };
