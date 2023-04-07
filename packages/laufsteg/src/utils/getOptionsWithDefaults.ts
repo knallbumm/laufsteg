@@ -9,6 +9,7 @@ export function getOptionsWithDefaults(
     animationSpeed: options.animationSpeed ?? 100,
     friction: options.friction ?? 8,
     overflowItems: options.overflowItems ?? 1,
+    scrollLockDistance: options.scrollLockDistance ?? 10,
     gap: options.gap ?? 0,
     cursor: options.cursor ?? {
       hover: 'grab',

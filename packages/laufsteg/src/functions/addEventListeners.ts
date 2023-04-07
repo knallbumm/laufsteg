@@ -15,14 +15,26 @@ export function addEventListeners(laufsteg: InternalLaufsteg) {
     draggingStarted(laufsteg)
   );
 
-  window.addEventListener('mousemove', draggingMoved(laufsteg));
-  window.addEventListener('touchmove', draggingMoved(laufsteg));
+  window.addEventListener('mousemove', draggingMoved(laufsteg), {
+    passive: false,
+  });
+  window.addEventListener('touchmove', draggingMoved(laufsteg), {
+    passive: false,
+  });
 
-  window.addEventListener('mouseup', draggingEnded(laufsteg));
-  window.addEventListener('touchend', draggingEnded(laufsteg));
+  window.addEventListener('mouseup', draggingEnded(laufsteg)),
+    {
+      passive: false,
+    };
+  window.addEventListener('touchend', draggingEnded(laufsteg), {
+    passive: false,
+  });
   laufsteg._internal.domNodes.trolley.addEventListener(
     'touchcancel',
-    draggingEnded(laufsteg)
+    draggingEnded(laufsteg),
+    {
+      passive: false,
+    }
   );
 
   laufsteg._internal.domNodes.trolley.addEventListener('transitionend', () => {

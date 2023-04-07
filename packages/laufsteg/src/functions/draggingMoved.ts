@@ -12,6 +12,14 @@ export const draggingMoved =
       return;
     }
 
+    if (
+      Math.abs(laufsteg._internal.currentDragTravel ?? 0) >
+      laufsteg.options.scrollLockDistance
+    ) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+
     const timeDeltaSinceLastMove =
       performance.now() - laufsteg._internal.lastMoveTimestamp;
 
