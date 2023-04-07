@@ -1,6 +1,6 @@
 import type { InternalLaufsteg } from '../types/InternalLaufsteg';
 import { getOffset } from '../utils/getOffset';
-import { rearrangeCellsIfNeeded } from './rearrangeCellsIfNeeded';
+import { rearrangeToPerfectPosition } from './rearrangeToPerfectPosition';
 import { resetDecelerating } from './resetDecelerating';
 import { setOffsetToDOM } from './setOffsetToDOM';
 import { startCSSAnimation } from './startCSSAnimation';
@@ -52,28 +52,10 @@ export const beginDeceleration =
       (laufsteg._internal.savedDragOffset -= pixelTravel)
     );
 
-    const numberOfItemsToSwitch = Math.ceil(
-      Math.abs(pixelTravel) / laufsteg._internal.cellSize.width
-    );
-
-    for (let i = 0; i < numberOfItemsToSwitch; i++) {
-      rearrangeCellsIfNeeded(laufsteg)();
-    }
+    rearrangeToPerfectPosition(laufsteg)();
 
     if (laufsteg._internal.state == 'DECLERATING') {
-      if (
-        Math.abs(currentSpeed) >
-          1 + Math.abs(laufsteg.options.animationSpeed) &&
-        releasedFasterThanAnimation
-      ) {
-        window.requestAnimationFrame((time) => {
-          beginDeceleration(laufsteg)(time);
-        });
-      } else if (
-        Math.abs(currentSpeed) + 1 <
-          Math.abs(laufsteg.options.animationSpeed) &&
-        !releasedFasterThanAnimation
-      ) {
+      if (Math.abs(pixelTravel) > 2) {
         window.requestAnimationFrame((time) => {
           beginDeceleration(laufsteg)(time);
         });

@@ -5,21 +5,23 @@
 
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                     supported by Chrome, Edge, Opera and Firefox */
 }
 
 .laufsteg-trolley {
-  position: relative;
   will-change: transform;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .laufsteg-cell {
-  position: absolute;
-  top: 0;
+  /*position: absolute;*/
+  /*top: 0;*/
   padding: 0 calc(var(--laufsteg-cell-gap) / 2);
   width: max-content;
+  will-change: transform;
 }

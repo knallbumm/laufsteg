@@ -29,7 +29,6 @@ export function createLaufsteg(
 
   laufsteg._internal.containerSize = getContainerSize(container);
 
-  // Sizes the trolley based on the first cell
   const firstCell = laufsteg._internal.domNodes.cells[0];
   laufsteg._internal.cellSize = getCellPixelSize(firstCell);
 
