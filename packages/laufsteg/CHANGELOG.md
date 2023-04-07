@@ -1,5 +1,11 @@
 # laufsteg
 
+## 0.0.12
+
+### Patch Changes
+
+- b723783: Improved performance, stability & added scrollock when scrolling vertically
+
 ## 0.0.11
 
 ### Patch Changes
