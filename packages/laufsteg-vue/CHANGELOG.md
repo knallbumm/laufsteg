@@ -1,5 +1,13 @@
 # laufsteg-vue
 
+## 0.0.14
+
+### Patch Changes
+
+- b723783: Improved performance, stability & added scrollock when scrolling vertically
+- Updated dependencies [b723783]
+  - laufsteg@0.0.12
+
 ## 0.0.13
 
 ### Patch Changes
