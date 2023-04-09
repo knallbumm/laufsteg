@@ -46,16 +46,20 @@ export const beginDeceleration =
         0.1 *
         Math.pow(progress * laufsteg.options.friction, 3);
     }
-    const pixelTravel = currentSpeed / (1000 / delta);
+    const pixelTravel = Math.round(currentSpeed / (1000 / delta));
 
-    setOffsetToDOM(laufsteg)(
-      (laufsteg._internal.savedDragOffset -= pixelTravel)
+    const newOffset = Math.round(
+      laufsteg._internal.savedDragOffset - pixelTravel
     );
+
+    laufsteg._internal.savedDragOffset = newOffset;
+
+    setOffsetToDOM(laufsteg)(newOffset);
 
     rearrangeToPerfectPosition(laufsteg)();
 
     if (laufsteg._internal.state == 'DECLERATING') {
-      if (Math.abs(pixelTravel) > 2) {
+      if (Math.abs(pixelTravel) >= 1) {
         window.requestAnimationFrame((time) => {
           beginDeceleration(laufsteg)(time);
         });
