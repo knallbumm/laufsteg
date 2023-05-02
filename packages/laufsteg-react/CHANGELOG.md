@@ -1,13 +1,5 @@
 # laufsteg
 
-## 0.0.13
-
-### Patch Changes
-
-- 916e493: Adding support for changing animation speed & fixing issues with visibility change
-- Updated dependencies [916e493]
-  - laufsteg@0.0.13
-
 ## 0.0.12
 
 ### Patch Changes
