@@ -1,7 +1,11 @@
+import type { LaufstegOptions } from '../../types';
 import type { LaufstegInternal } from '../../types/LaufstegInternal';
 import { parseDomNodes } from '../../utils/parseDomNodes';
 
-export function initInternal(container: HTMLDivElement): LaufstegInternal {
+export function initInternal(
+  container: HTMLDivElement,
+  options: LaufstegOptions
+): LaufstegInternal {
   return {
     domNodes: parseDomNodes(container),
     state: undefined,
@@ -17,5 +21,6 @@ export function initInternal(container: HTMLDivElement): LaufstegInternal {
     lastMoveTimestamp: 0,
     decelerationStart: undefined,
     lastDelecerationFrameTimestamp: undefined,
+    options: options,
   };
 }

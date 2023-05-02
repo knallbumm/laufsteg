@@ -1,4 +1,5 @@
 import { addEventListeners } from '../functions/addEventListeners';
+import { addVisibilityCheck } from '../functions/addVisibilityCheck';
 import { initLaufsteg } from '../functions/init/initLaufsteg';
 import { rebuild } from '../functions/rebuild';
 import { start } from '../functions/start';
@@ -52,9 +53,17 @@ export function createLaufsteg(
     applyItemSize(laufsteg)();
   });
 
+  const startFn = start(laufsteg);
+  const stopFn = stop(laufsteg);
+
+  addVisibilityCheck({
+    onVisible: startFn,
+    onHidden: stopFn,
+  });
+
   (laufsteg as Laufsteg as LaufstegWithFunctions).rebuild = rebuild(laufsteg);
-  (laufsteg as Laufsteg as LaufstegWithFunctions).start = start(laufsteg);
-  (laufsteg as Laufsteg as LaufstegWithFunctions).stop = stop(laufsteg);
+  (laufsteg as Laufsteg as LaufstegWithFunctions).start = startFn;
+  (laufsteg as Laufsteg as LaufstegWithFunctions).stop = stopFn;
 
   return laufsteg as Laufsteg as LaufstegWithFunctions;
 }

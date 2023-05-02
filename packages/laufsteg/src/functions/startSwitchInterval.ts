@@ -9,7 +9,7 @@ export const startSwitchInterval = (laufsteg: InternalLaufsteg) => () => {
 
   const animationDuration =
     laufsteg._internal.cellSize.width /
-    Math.abs(laufsteg.options.animationSpeed);
+    Math.abs(laufsteg._internal.options.animationSpeed);
 
   // uses window to fix type error with react
   laufsteg._internal.runningInterval = window.setInterval(() => {

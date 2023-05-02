@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import type { LaufstegOptions } from 'laufsteg';
 import { createLaufsteg } from 'laufsteg';
-import { defineExpose, ref, watchEffect } from 'vue';
+import { defineExpose, ref, watch, watchEffect } from 'vue';
 
 const laufsteg = ref<ReturnType<typeof createLaufsteg>>();
 
@@ -32,6 +32,16 @@ const props = defineProps<{
 }>();
 
 const trolley = ref<HTMLDivElement>();
+
+watch(
+  () => props.animationSpeed,
+  () => {
+    if (!laufsteg.value) {
+      return;
+    }
+    laufsteg.value.options.animationSpeed = props.animationSpeed ?? 100;
+  }
+);
 
 const update = () => {
   laufsteg.value?.rebuild();

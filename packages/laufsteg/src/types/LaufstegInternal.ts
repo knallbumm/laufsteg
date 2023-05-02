@@ -1,4 +1,5 @@
 import type { DomNodes } from './DomNodes';
+import type { LaufstegOptions } from './LaufstegOptions';
 import type { Size } from './Size';
 
 export interface LaufstegInternal {
@@ -17,4 +18,5 @@ export interface LaufstegInternal {
   decelerationStart: number | undefined;
   lastDelecerationFrameTimestamp: number | undefined;
   runningInterval?: number;
+  options: LaufstegOptions;
 }
