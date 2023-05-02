@@ -18,6 +18,7 @@ export const cloneCellsWhenNeeded = (laufsteg: InternalLaufsteg) => () => {
   );
 
   laufsteg._internal.cellPositions = prepareCellPositions(
-    laufsteg._internal.domNodes.cells.length
+    laufsteg._internal.domNodes.cells.length,
+    laufsteg._internal.options.overflowItems
   );
 };

@@ -17,7 +17,7 @@ export const beginDeceleration =
     laufsteg._internal.lastDelecerationFrameTimestamp = frameTimestamp;
 
     const finalSpeed = !laufsteg._internal.currentDragTravel
-      ? laufsteg.options.animationSpeed
+      ? laufsteg._internal.options.animationSpeed
       : 0;
 
     const progress =
@@ -29,7 +29,7 @@ export const beginDeceleration =
 
     const releasedFasterThanAnimation =
       Math.abs(laufsteg._internal.dragReleaseSpeed) >
-      Math.abs(laufsteg.options.animationSpeed);
+      Math.abs(laufsteg._internal.options.animationSpeed);
     if (releasedFasterThanAnimation) {
       currentSpeed =
         laufsteg._internal.dragReleaseSpeed *
