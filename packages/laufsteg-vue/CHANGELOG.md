@@ -1,5 +1,13 @@
 # laufsteg-vue
 
+## 0.0.16
+
+### Patch Changes
+
+- d35948f: Releasing new version
+- Updated dependencies [d35948f]
+  - laufsteg@0.0.14
+
 ## 0.0.15
 
 ### Patch Changes
