@@ -1,5 +1,13 @@
 # laufsteg-vue
 
+## 0.0.17
+
+### Patch Changes
+
+- 1deb6d5: Bug fixes
+- Updated dependencies [1deb6d5]
+  - laufsteg@0.0.15
+
 ## 0.0.16
 
 ### Patch Changes

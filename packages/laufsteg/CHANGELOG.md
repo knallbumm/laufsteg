@@ -1,5 +1,11 @@
 # laufsteg
 
+## 0.0.15
+
+### Patch Changes
+
+- 1deb6d5: Bug fixes
+
 ## 0.0.14
 
 ### Patch Changes
