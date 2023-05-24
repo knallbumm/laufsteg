@@ -9,6 +9,6 @@ export const startCSSAnimation = (laufsteg: InternalLaufsteg) => () => {
   const animationDuration = 60;
 
   addCSSTransition(laufsteg)(animationDuration);
-  
+
   setNewAnimationPosition(laufsteg)();
 };

@@ -51,6 +51,8 @@ export function createLaufsteg(
   addResizeObserver(firstCell, () => {
     laufsteg._internal.cellSize = getCellPixelSize(firstCell);
     applyItemSize(laufsteg)();
+    stop(laufsteg)();
+    start(laufsteg)();
   });
 
   const startFn = start(laufsteg);
