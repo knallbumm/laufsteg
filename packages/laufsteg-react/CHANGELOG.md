@@ -1,5 +1,11 @@
 # laufsteg
 
+## 0.0.16
+
+### Patch Changes
+
+- 86b6de5: removing rerender on child change
+
 ## 0.0.15
 
 ### Patch Changes
