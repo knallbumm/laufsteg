@@ -10,8 +10,6 @@ import { createLaufsteg } from 'laufsteg';
 import type { PropsWithChildren } from 'react';
 import React, { Children, useCallback, useEffect, useRef } from 'react';
 
-import { useOnlyUpdateEffect } from '../hooks/useOnlyUpdateEffect';
-
 export function Laufsteg({
   children,
   onDragStart,
