@@ -70,10 +70,6 @@ export function Laufsteg({
     handleDecelerationEnd,
   ]);
 
-  useOnlyUpdateEffect(() => {
-    laufsteg.current?.rebuild();
-  }, [children]);
-
   return (
     <div ref={container} className="laufsteg-container">
       <div className="laufsteg-trolley">
