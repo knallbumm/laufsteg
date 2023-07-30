@@ -1,5 +1,11 @@
 # laufsteg
 
+## 0.0.16
+
+### Patch Changes
+
+- 7d741fd: hiding laufsteg until it has positioned all elements corectly
+
 ## 0.0.15
 
 ### Patch Changes
