@@ -8,7 +8,7 @@ import type {
 } from 'laufsteg';
 import { createLaufsteg } from 'laufsteg';
 import type { PropsWithChildren } from 'react';
-import React, { Children, useCallback, useEffect, useRef } from 'react';
+import React, { Children, useCallback, useRef } from 'react';
 
 export function Laufsteg({
   children,
@@ -21,7 +21,6 @@ export function Laufsteg({
   Partial<LaufstegOptions> & Partial<Callbacks>
 >): React.ReactElement {
   const laufsteg = useRef<ReturnType<typeof createLaufsteg> | undefined>();
-  const container = useRef<HTMLDivElement | null>(null);
 
   const handleDragStart = useCallback(
     (...args: Parameters<OnDragStart>) => {
@@ -51,25 +50,19 @@ export function Laufsteg({
     [onDecelerationEnd]
   );
 
-  useEffect(() => {
-    if (container.current && !laufsteg.current) {
-      laufsteg.current = createLaufsteg(container.current, props);
+  const initiateLaufsteg = useCallback((elm: HTMLDivElement) => {
+    if (elm && !laufsteg.current) {
+      laufsteg.current = createLaufsteg(elm, props);
       laufsteg.current.callbacks.onDragStart = onDragStart && handleDragStart;
       laufsteg.current.callbacks.onDragEnd = onDragEnd && handleDragEnd;
       laufsteg.current.callbacks.onDecelerationStart =
         onDecelerationStart && handleDecelerationStart;
       laufsteg.current.callbacks.onDecelerationEnd && handleDecelerationEnd;
     }
-  }, [
-    container.current,
-    handleDragStart,
-    handleDragEnd,
-    handleDecelerationStart,
-    handleDecelerationEnd,
-  ]);
+  }, []);
 
   return (
-    <div ref={container} className="laufsteg-container">
+    <div ref={initiateLaufsteg} className="laufsteg-container">
       <div className="laufsteg-trolley">
         {Children.map(children, (child) => (
           <div className="laufsteg-cell">{child}</div>

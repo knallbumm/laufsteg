@@ -3,7 +3,6 @@ import { addVisibilityCheck } from '../functions/addVisibilityCheck';
 import { initLaufsteg } from '../functions/init/initLaufsteg';
 import { rebuild } from '../functions/rebuild';
 import { start } from '../functions/start';
-import { startSwitchInterval } from '../functions/startSwitchInterval';
 import { stop } from '../functions/stop';
 import type { LaufstegOptions } from '../types';
 import type { Laufsteg } from '../types/Laufsteg';
@@ -16,6 +15,7 @@ import { getCellPixelSize } from '../utils/getCellPixelSize';
 import { getContainerSize } from '../utils/getContainerSize';
 import { getOptionsWithDefaults } from '../utils/getOptionsWithDefaults';
 import { isDragging } from '../utils/isDragging';
+import { markLaufstegAsReady } from '../utils/markLaufstegAsReady';
 import { setPositionsToCells } from '../utils/setPositionsToCells';
 
 export function createLaufsteg(
@@ -44,10 +44,6 @@ export function createLaufsteg(
 
   applyCursors(container, parsedOptions.cursor, isDragging(laufsteg));
 
-  start(laufsteg)();
-
-  startSwitchInterval(laufsteg)();
-
   addResizeObserver(firstCell, () => {
     laufsteg._internal.cellSize = getCellPixelSize(firstCell);
     applyItemSize(laufsteg)();
@@ -66,6 +62,10 @@ export function createLaufsteg(
   (laufsteg as Laufsteg as LaufstegWithFunctions).rebuild = rebuild(laufsteg);
   (laufsteg as Laufsteg as LaufstegWithFunctions).start = startFn;
   (laufsteg as Laufsteg as LaufstegWithFunctions).stop = stopFn;
+
+  start(laufsteg)();
+
+  markLaufstegAsReady(container);
 
   return laufsteg as Laufsteg as LaufstegWithFunctions;
 }
