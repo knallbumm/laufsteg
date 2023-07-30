@@ -1,5 +1,13 @@
 # laufsteg
 
+## 0.0.17
+
+### Patch Changes
+
+- 7d741fd: hiding laufsteg until it has positioned all elements corectly
+- Updated dependencies [7d741fd]
+  - laufsteg@0.0.16
+
 ## 0.0.16
 
 ### Patch Changes
