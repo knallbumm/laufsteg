@@ -1,5 +1,13 @@
 # laufsteg-vue
 
+## 0.0.19
+
+### Patch Changes
+
+- 84de481: fix: #exports types
+- Updated dependencies [84de481]
+  - laufsteg@0.0.17
+
 ## 0.0.18
 
 ### Patch Changes

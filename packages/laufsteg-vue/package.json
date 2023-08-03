@@ -1,7 +1,7 @@
 {
   "name": "laufsteg-vue",
   "description": "Simple infinite moving component",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "type": "module",
   "files": [
     "dist"

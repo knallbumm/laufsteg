@@ -1,5 +1,11 @@
 # laufsteg
 
+## 0.0.17
+
+### Patch Changes
+
+- 84de481: fix: #exports types
+
 ## 0.0.16
 
 ### Patch Changes
