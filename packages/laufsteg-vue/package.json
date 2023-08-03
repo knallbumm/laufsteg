@@ -12,7 +12,8 @@
   },
   "homepage": "https://github.com/knallbumm/laufsteg#readme",
   "exports": {
-    "default": "./dist/index.es.js"
+    "default": "./dist/index.es.js",
+    "types": "./dist/index.d.ts"
   },
   "module": "./dist/index.es.js",
   "unpkg": "./dist/index.umd.js",
