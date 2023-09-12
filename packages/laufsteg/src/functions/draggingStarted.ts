@@ -5,6 +5,7 @@ import { getOffset } from '../utils/getOffset';
 import { isDragging } from '../utils/isDragging';
 import { resetDecelerating } from './resetDecelerating';
 import { stopCSSAnimation } from './stopCSSAnimation';
+import { stopSwitchInterval } from './stopSwitchInterval';
 
 export const draggingStarted =
   (laufsteg: InternalLaufsteg) => (event: MouseEvent | TouchEvent) => {
@@ -13,6 +14,7 @@ export const draggingStarted =
     }
 
     stopCSSAnimation(laufsteg)();
+    stopSwitchInterval(laufsteg)();
     laufsteg._internal.state = 'DRAGGING';
     resetDecelerating(laufsteg)();
 

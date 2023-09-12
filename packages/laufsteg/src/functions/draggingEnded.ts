@@ -7,6 +7,7 @@ import { beginDeceleration } from './beginDeceleration';
 import { resetDrag } from './resetDrag';
 import { setAnimationDirection } from './setAnimationDirection';
 import { setOffsetToDOM } from './setOffsetToDOM';
+import { startSwitchInterval } from './startSwitchInterval';
 
 export const draggingEnded = (laufsteg: InternalLaufsteg) => () => {
   if (!isDragging(laufsteg)) {
@@ -30,6 +31,7 @@ export const draggingEnded = (laufsteg: InternalLaufsteg) => () => {
     dragReleaseSpeed
   );
   beginDeceleration(laufsteg)(performance.now());
+  startSwitchInterval(laufsteg)();
 
   resetDrag(laufsteg)();
 
