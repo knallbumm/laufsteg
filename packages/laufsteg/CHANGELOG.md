@@ -1,5 +1,11 @@
 # laufsteg
 
+## 0.0.18
+
+### Patch Changes
+
+- b92c556: fix: offset buildup when rotated
+
 ## 0.0.17
 
 ### Patch Changes
