@@ -11,9 +11,9 @@ const container2 = document.getElementById(
 ) as HTMLDivElement;
 
 if (container1) {
-  const laufsteg1 = createLaufsteg(container1, { gap: '3rem' });
+  createLaufsteg(container1, { gap: '3rem' });
 }
 
 if (container2) {
-  const laufsteg2 = createLaufsteg(container2, { gap: '3rem' });
+  createLaufsteg(container2, { gap: '3rem' });
 }

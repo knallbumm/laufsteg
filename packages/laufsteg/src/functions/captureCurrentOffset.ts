@@ -11,5 +11,10 @@ export const captureCurrentOffset = (laufsteg: InternalLaufsteg) => () => {
     laufsteg._internal.domNodes.container.getBoundingClientRect();
   const clientRect =
     laufsteg._internal.domNodes.trolley.getBoundingClientRect();
-  laufsteg._internal.savedDragOffset = clientRect.x - containerRect.x;
+  const x = clientRect.x - containerRect.x;
+  const y = clientRect.y - containerRect.y;
+
+  const hypotenuse = Math.sign(x) * Math.sqrt(x**2 + y**2);
+  
+  laufsteg._internal.savedDragOffset = hypotenuse;
 };

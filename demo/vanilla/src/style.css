@@ -6,3 +6,9 @@ body {
     margin: 0;
     font-size: 3rem;
 }
+
+#app {
+    height: 100dvh;
+    display: grid;
+    grid-template-rows: 80% 20%;
+}
