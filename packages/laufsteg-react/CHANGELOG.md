@@ -1,5 +1,12 @@
 # laufsteg
 
+## 0.0.19
+
+### Patch Changes
+
+- Updated dependencies [b92c556]
+  - laufsteg@0.0.18
+
 ## 0.0.18
 
 ### Patch Changes
